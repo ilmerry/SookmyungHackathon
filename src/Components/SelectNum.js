@@ -12,15 +12,24 @@ function SelectNum(){
 
     const onClickHandler = (len)=>{
         setMaxlength(len)
-        var inform = {maxlength,page}
-        fetch(`${API_URL}/result`, {
+        var inform = {'maxlength':maxlength}
+        fetch(`${API_URL}/maxlength`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(inform),  
         })
-        .then(response => console.log("response"))
+        .then(async res => { 
+            try {
+                const jsonRes = await res.json();
+                if (res.status === 200) {
+                    console.log(jsonRes.message);
+                }
+            } catch (err) {
+                console.log(err);
+            };
+        });
         // 페이지 전환
     }
 
