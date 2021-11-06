@@ -1,5 +1,4 @@
-Adventurer
-Composer
+Protector
 Quiet
 Reflective
 Practical
@@ -7,6 +6,6 @@ Action-Oriented
 Empathetic
 Cooperative
 Loyal
-Flexible
-Curious
-Informal
+Decisive
+Plans
+Rigid

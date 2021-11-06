@@ -1,12 +1,11 @@
-Adventurer
-Composer
+Crafter
 Quiet
 Reflective
 Practical
 Action-Oriented
-Empathetic
-Cooperative
-Loyal
+Objective
+Rational
+Logical
 Flexible
 Curious
 Informal
