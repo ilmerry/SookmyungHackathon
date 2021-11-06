@@ -1,0 +1,96 @@
+.resultBG{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    padding-top: 200px;
+    height: 40%; 
+    width: 50%;
+    margin:auto;
+    display: block;
+    border-radius: 30%;
+}
+
+.otherBtn{
+    border-radius: 30px;
+    font-size: medium;
+    width: 200px;
+    height: 40px;
+    margin:auto;
+    display: block;
+    margin-top: 10px;
+    background-color: #5C7BE7;
+    color: white;
+}
+
+.name{
+    text-align: left;
+    position:  fixed;
+    top: 17%;
+    left: 28vw
+}
+
+.ko_name{
+    font-size: 2.5vw;
+}
+
+.eng_name{
+    font-size: 2vw;
+}
+
+.nameIcon{
+    width: 1.3cm;
+    height: 4vh;
+}
+
+.other_names{
+    text-align: left;
+    float: right;
+    padding-top: 30px;
+    font-size: 1.5vw;
+    padding-right: 30px;
+}
+
+.copy_sen{
+    color: gray;
+    position: fixed;
+    right: 30%;
+    top: 70vh;
+}
+
+@media screen and (max-width:768px) {
+   /* 미디어쿼리 쓰자 */
+   .name{
+    text-align: left;
+    position:  fixed;
+    top: 18%;
+    left: 28vw
+    }
+    
+    .resultBG{
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        padding-top: 20vw;
+        height: 40%; 
+        width: 50%;
+        margin:auto;
+        display: block;
+    }
+
+    .other_names{
+        text-align: left;
+        float: right;
+        padding-top: 90px;
+        font-size: 1.5vw;
+        padding-right: 10px;
+        
+    }
+
+    .copy_sen{
+        color: gray;
+        position: fixed;
+        right: 30%;
+        top: 50%;
+        font-size: 2vw;
+    }
+}
