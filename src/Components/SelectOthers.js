@@ -5,7 +5,7 @@ import Calendar from 'react-calendar';
 import EditText from 'react-edit-text';
 import 'react-calendar/dist/Calendar.css';
 import 'react-edit-text/dist/index.css';
-
+const API_URL = 'http://localhost:3001'
 
 Modal.setAppElement('#root') //
 function SelectOthers() {
@@ -14,20 +14,30 @@ function SelectOthers() {
     const [name, setName ]=useState(null);
     const [mbti, setMbti ]=useState(null);
     const [color, setColor ]=useState(null);
-    const page=4;
+   
 
-    const onClickBirth = ()=>{
-        
+    // 4개중에 2개 이하가 Null 일때 결과보기 버튼 활성화
+
+    const generateNick = ()=>{
+
+        const inform = {birth, name, mbti, color};
+        fetch(`${API_URL}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(inform),  
+        })
+        .then(async res => { 
+            try {
+                // 닉네임으로 응답이 오면 받고 다음페이지로 넘어가는 코드 수행
+
+            } catch (err) {
+                console.log(err);
+            };
+        });
     }
 
-    const onClickName = ()=>{
-        
-    }
-
-    const onClickColor = ()=>{
-        
-    }
-    
     const [nameModal, setNameModal] = useState(false)
     const [birthModal, setbirthModal] = useState(false)
     const [mbtiModal, setMbtiModal] = useState(false)
@@ -211,6 +221,7 @@ function SelectOthers() {
                 <tfoot></tfoot>
             </table>
 
+            <button onClick={()=>{generateNick()}}>결과</button>
         </div>
     )
 

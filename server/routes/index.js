@@ -24,33 +24,76 @@ router.post('/maxlength', function(req, res){
     return res.status(200).json({message: "success"});
 })
 
-router.post('/about', function(req,res){
+
+router.get('/result', function(req, res){
+
     birth = req.body.birth
     name = req.body.name
     mbti = req.body.mbti
     color = req.body.color
-    return res.status(200).json({message:"success"})
+    
 
-})
+    function translation(lan, string) {
+        var source, target;
+        if (lan == "en") {
+          (source = "kor"), (target = "en");
+        } else {
+          (source = "en"), (target = "kor");
+        }
+        var api_url = "https://openapi.naver.com/v1/papago/n2mt";
+        var request = require("request");
+        var options = {
+          url: api_url,
+          form: { source: source, target: target, text: string },
+          headers: {
+            "X-Naver-Client-Id": client_id,
+            "X-Naver-Client-Secret": client_secret,
+          },
+        };
+        request.post(options, function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+            res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+            res.end(body);
+            // res.writeHead, end 꼭 필수인지 모르겠음
+            return res.body.message.result.translatedText;
+            // body가 들어가는지 모르겟음
+          } else {
+            res.status(response.statusCode).end();
+            console.log("error = " + response.statusCode);
+          }
+        });
+    }
 
-router.get('/result', function(req, res){
+    function getBirth(birth) {
+    // format:dd mmm yyyy
+    var day = birth.slice(-2); // 08
+    var month = birth.slice(2, 4); // 06
+    var year = birth.slice(0, 3); // 99
+    let month3 = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
 
-    // 부수적으로 김수정이면 crystal 뽑아오는것도 하고싶긴한데 나중에 되면 수행하
+    ]
+    result.push(day);
+    result.push(month);
+    result.push(year);
+    result.push(month12[parseInt(month) - 1]);
+    }
+    
+    function getName(name) {
+        // 파파고 api !! 프론트에서 한글로만 성명받는것으로 제한
 
-    // 응답 예시
-    // {
-    //     "message": {
-    //         "@type": "response",
-    //         "@service": "naverservice.nmt.proxy",
-    //         "@version": "1.0.0",
-    //         "result": {
-    //             "srcLangType":"ko",
-    //             "tarLangType":"en",
-    //             "translatedText": "tea"
-    //         }
-    //     }
-    // }
-  
+        // 제한언어 영어이면 한글->영어로 변환
+        if (language == "en") {
+            var trans = translation("en", name);
+            result.push(trans);
+        } else {
+            result.push(name);
+        }
+    }
+
   function getMbti(mbti) {
     // 파일에서 불러오기
     var fs = require("fs");
@@ -97,25 +140,17 @@ router.get('/result', function(req, res){
       delete attribute[propName];
     }
   }
-  property = Object.keys(attribute)[(b, n, c)];
+  property = Object.keys(attribute);
   while (property.length > 2) {
     const random = Math.floor(Math.random() * property.length);
     property.splice(random, 1);
   }
   // 속성 2개에 따른 결과 result에 저장
   for (prop in property) {
-    if (prop == "b") {
-      getBirth(birth);
-    }
-    if (prop == "n") {
-      getName(name);
-    }
-    if (prop == "m") {
-      getMbti(mbti);
-    }
-    if (prop == "c") {
-      getColor(color);
-    }
+    if (prop == "b") { getBirth(birth);}
+    if (prop == "n") { getName(name);}
+    if (prop == "m") { getMbti(mbti);}
+    if (prop == "c") { getColor(color);}
   }
 
   // result 조합하는 코드
@@ -168,3 +203,5 @@ router.get('/result', function(req, res){
 });
 
 module.exports = router;
+
+
