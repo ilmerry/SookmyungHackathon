@@ -13,7 +13,7 @@ const backgroundStyle = {
 
 function SelectPage(){
     return (
-        <div style={backgroundStyle}>
+        <div className="main" style={backgroundStyle}>
             <Progressbar />
             <SelectOthers />
         </div>
