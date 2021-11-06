@@ -98,37 +98,42 @@ function SelectOthers() {
                             backgroundColor: 'grey'
                         },
                         content: {
-                            color: '#D15593'
+                            color: '#D15593',
+                            width: "70%",
+                            position: "fixed",
+                            left: "13%",
                         }
                     }
-                }>
+                    
+                }
+                >
                 
                 <table>
                     <thead></thead>
                     <tbody>
                         <tr>
-                            <td  onClick={() => setMbtiModal(false)}>ISTJ</td>
-                            <td>ISFJ</td>
-                            <td>INFJ</td>
-                            <td>INTJ</td>
+                            <td className="mbti_t" onClick={() => setMbtiModal(false)}>ISTJ</td>
+                            <td className="mbti_t">ISFJ</td>
+                            <td className="mbti_t">INFJ</td>
+                            <td className="mbti_t">INTJ</td>
                         </tr>
                         <tr>
-                            <td>ISTP</td>
-                            <td>ISFP</td>
-                            <td>INFP</td>
-                            <td>INTP</td>
+                            <td className="mbti_t">ISTP</td>
+                            <td className="mbti_t">ISFP</td>
+                            <td className="mbti_t">INFP</td>
+                            <td className="mbti_t">INTP</td>
                         </tr>
                         <tr>
-                            <td>ESTP</td>
-                            <td>ESFP</td>
-                            <td>ENFP</td>
-                            <td>ENTP</td>
+                            <td className="mbti_t">ESTP</td>
+                            <td className="mbti_t">ESFP</td>
+                            <td className="mbti_t">ENFP</td>
+                            <td className="mbti_t">ENTP</td>
                         </tr>
                         <tr>
-                            <td>ESTJ</td>
-                            <td>ESFJ</td>
-                            <td>ENFJ</td>
-                            <td>ENFJ</td>
+                            <td className="mbti_t">ESTJ</td>
+                            <td className="mbti_t">ESFJ</td>
+                            <td className="mbti_t">ENFJ</td>
+                            <td className="mbti_t">ENFJ</td>
                         </tr>
                     </tbody>
                     <tfoot></tfoot>
@@ -191,20 +196,21 @@ function SelectOthers() {
                 <thead></thead>
                 <tbody>
                 <tr>
-                    <td 
+                    <td className="select"
                         onClick={() => setNameModal(true)}
                         >이름</td>
-                    <td onClick={() => setbirthModal(true)}>생일</td>
-                    <td onClick={() => setMbtiModal(true)}>mbti</td>
+                    <td className="select" onClick={() => setbirthModal(true)}>생일</td>
+                    <td className="select" onClick={() => setMbtiModal(true)}>mbti</td>
                 </tr>
                 <tr>
-                    <td onClick={() => setHobbyModal(true)}>취미</td>
-                    <td onClick={() => setColorModal(true)}>색상</td>
-                    <td onClick={() => setCharModal(true)}>성격</td>
+                    <td className="select" onClick={() => setHobbyModal(true)}>취미</td>
+                    <td className="select" onClick={() => setColorModal(true)}>색상</td>
+                    <td className="select" onClick={() => setCharModal(true)}>성격</td>
                 </tr>
                 </tbody>
                 <tfoot></tfoot>
             </table>
+
         </div>
     )
 
