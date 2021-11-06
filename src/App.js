@@ -1,6 +1,7 @@
 import './App.css';
 
 import StartPage from './Components/StartPage';
+import SelectPage from './Components/SelectPage';
 import ResultPage from './Components/ResultPage';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
@@ -12,10 +13,10 @@ function App() {
     <StartPage/>
       <Routes>
         
-        <Route path="/" exact component={StartPage}/>
-        <Route path="/result" component={ResultPage}>
+        <Route path="/" exact element={<StartPage/>}/>
+        <Route path="/select" element={<SelectPage/>}/>
+        <Route path="/result" element={<ResultPage/>}/>
 
-        </Route>
       </Routes>
     </BrowserRouter>
   );

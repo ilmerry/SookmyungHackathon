@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../css/SelectOthers.css';
 import Modal from 'react-modal';
 
 
