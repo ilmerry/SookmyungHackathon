@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import StartPage from './Components/StartPage';
+import SelectPage from './Components/SelectPage';
 import ResultPage from './Components/ResultPage';
 import SelectNum from './Components/SelectNum';
 import SelectLang  from './Components/SelectLang';
@@ -14,10 +15,8 @@ const App = ()=>{
       <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<StartPage />}/>
-        <Route path="/language" element={<SelectLang/>}/>
-        <Route path="/maxlen" element={<SelectNum/>}/>
+        <Route path="/select" element={<SelectPage />}/>
         <Route path="/result" element={<ResultPage/>}/>
-        <Route path="/others" element={<SelectOthers/>}/>
       </Routes>
       </BrowserRouter>
     </div>

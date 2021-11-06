@@ -2,7 +2,7 @@ import React from "react";
 import Progressbar from "./Progressbar";
 import SelectLang from "./SelectLang";
 import SelectNum from "./SelectNum";
-import SelectAbout from "./SelectAbout";
+import SelectOthers from "./SelectOthers";
 
 const backgroundStyle = {
         backgroundImage: 'url(/images/selectLangBackground.png)',
@@ -13,9 +13,9 @@ const backgroundStyle = {
 
 function SelectPage(){
     return (
-        <div style={backgroundStyle}>
+        <div className="main"style={backgroundStyle}>
             <Progressbar />
-            <SelectNum />
+            <SelectOthers />
         </div>
     );
 }

@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import '../css/SelectOthers.css';
 import Modal from 'react-modal';
+import Calendar from 'react-calendar';
+import EditText from 'react-edit-text';
+import 'react-calendar/dist/Calendar.css';
+import 'react-edit-text/dist/index.css';
 
 
 Modal.setAppElement('#root') //
@@ -31,6 +35,14 @@ function SelectOthers() {
     const [colorModal, setColorModal] = useState(false)
     const [charModal, setCharModal] = useState(false)
     
+    const [birthCal, setBirthCal] = useState(new Date());
+
+    const getDay=() => {
+        // 생일 입력 받아옴
+        console.log(birthCal);
+        setbirthModal(false);
+    }
+
     return (
         <div>
 
@@ -69,6 +81,11 @@ function SelectOthers() {
                     }
                 }>
                 <div>생일</div>
+                <div className="css-calDiv">
+                    <Calendar className="css-cal"
+                    maxDate={new Date()}
+                    onClickDay={() => getDay()} />
+                </div>
                 <button onClick={() => setbirthModal(false)}> 닫기</button>
             </Modal>
 
