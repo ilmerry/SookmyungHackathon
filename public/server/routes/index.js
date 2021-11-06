@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var language, maxlength, birth, name, mbti, color;
+let result = new Array();
 
 // env로 보호할 예정
 var client_id = 'KPC6oEv7Qv7pfNvfVIOn';
@@ -12,33 +13,27 @@ router.get('/', function(req, res){
     res.send({message: "START"});
 })
 
-// front
-
-// -> 2페이지 프런트
-// inform = {language,page}
-// fetch(`${API_URL = 서버주소}/result`, {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(inform),  
-//     => 이렇게 전달{maxlength:값, page:페이지값}
-// })
-
-
+router.get('/language', function(req, res){
+    language=req.body.language
+    res.send({language: language})
+    return res.status(200).json({message: "email already exists"});
+})
 router.get('/result', function(req, res){
 
     if (req.body.page==2 ) {
         language=req.body.language
+        return res.status(200)
     }
     if (req.body.page == 3){
         maxlength=req.body.maxlength
+        return res.status(200)
     }
     if (req.body.page == 4){
         birth = req.body.birth
         name = req.body.name
         mbti = req.body.mbti
         color = req.body.color
+        return res.status(200)
     }
 
     result=[] 
@@ -73,13 +68,12 @@ router.get('/result', function(req, res){
         var day = birth.slice(-2); // 08
         var month = birth.slice(2,4); // 06 
         var year = birth.slice(0,3); // 99
+        var month12 = ['January', 'Febraury', 'March', 'April', 'May', 'June','July','August','September','October','November','December'];
+        
         result.push(day);
         result.push(month);
         result.push(year);
-
-        month12 = ['January', 'Febraury', 'March', 'April', 'May', 
-        'June','July','August','September','October','November','December'];
-        result.push(month12[parseInt(month)+1]);
+        result.push(month12[parseInt(month)-1]);
     }
     function getName(name){ // 파파고 api !! 프론트에서 한글로만 성명받는것으로 제한
 
@@ -165,9 +159,27 @@ router.get('/result', function(req, res){
     
     // result 조합하는 코드
 
+    // let pick1 = Math.floor(Math.random() * maxlength);
+    // let pick2 = Math.floor(Math.random() * maxlength);
+
+    // let new_nickname = pick1 + pick2;
+
     // 메일과 인스타 아이디 조합하는 코드
 
-
+    // let new_instaId = ()=>{
+    //     // 인스타 아이디 ._ 랜덤첨가
+    //     let pick_ = Math.floor(Math.random() * maxlength);
+    //     let pick_dot = Math.floor(Math.random() * maxlength);
+    //     let new_instaId = [new_nickname.slice(0, pick_), '_', new_nickname.slice(pick_)].join('');
+    //     new_instaId = [new_nickname.slice(0, pick_dot), '.', new_nickname.slice(pick_dot)].join('');
+    //     return new_instaId;
+    // }
+    // new_instaId(); // 인스타 아이디 반환
+    // let new_email = new_nickname + 'example.com';
+    // let new_gameNick = ()=>{
+    //     // 게임 아이디 ㅈ->z ㅣ->i ... ol별의or픔 Lr의꿈 ol수일과심순oH ∑돌쇠∽ 
+    // }
+    // new_gameNick(); // 게임 아이디 반환
 
     res.send({nickname: "결과"});
 })

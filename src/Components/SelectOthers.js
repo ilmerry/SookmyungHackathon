@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import '../css/SelectOthers.css';
 import Modal from 'react-modal';
 
 
@@ -124,14 +125,7 @@ function SelectOthers() {
                 <thead></thead>
                 <tbody>
                 <tr>
-                    <td onClick={() => setNameModal(true)}
-                        >
-                        
-                        <div style={{
-                            backgroundImage: 'url(/assets/lightblueBtn.png)',
-                            width: "5vw",
-                            
-                        }}>이름</div></td>
+                    <td onClick={() => setNameModal(true)}>이름</td>
                     <td onClick={() => setbirthModal(true)}>생일</td>
                     <td onClick={() => setMbtiModal(true)}>mbti</td>
                 </tr>

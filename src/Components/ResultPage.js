@@ -7,8 +7,6 @@ import { AiFillMail } from "react-icons/ai";
 import { IoGameControllerOutline } from "react-icons/io5";
 
 function ResultPage(){
-    
-
     return(
         <div>
             <div style={{
