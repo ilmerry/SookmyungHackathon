@@ -15,7 +15,7 @@ function SelectPage(){
     return (
         <div style={backgroundStyle}>
             <Progressbar />
-            <SelectNum />
+            <SelectLang />
         </div>
     );
 }
