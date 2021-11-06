@@ -1,0 +1,26 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.css-pgbar {
+    position: relative;
+    width: 100vw;
+    height: 16px;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.css-pgbar::-webkit-progress-bar{
+    background-color: rgb(185, 185, 185);
+    margin-top: -5px;
+    border-radius: 0px;
+}
+
+.css-pgbar::-webkit-progress-value{
+    background-color: #710273;
+    border-radius: 0px;
+}
