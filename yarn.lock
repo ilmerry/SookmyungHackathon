@@ -5655,6 +5655,11 @@
   "resolved" "https://registry.npmjs.org/handle-thing/-/handle-thing-2.0.1.tgz"
   "version" "2.0.1"
 
+"hangul-js@^0.2.6":
+  "integrity" "sha512-48axU8LgjCD30FEs66Xc04/8knxMwCMQw0f67l67rlttW7VXT3qRJgQeHmhiuGwWXGvSbk6YM0fhQlcjE1JFQA=="
+  "resolved" "https://registry.npmjs.org/hangul-js/-/hangul-js-0.2.6.tgz"
+  "version" "0.2.6"
+
 "harmony-reflect@^1.4.6":
   "integrity" "sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g=="
   "resolved" "https://registry.npmjs.org/harmony-reflect/-/harmony-reflect-1.6.2.tgz"
