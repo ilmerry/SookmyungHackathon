@@ -1,8 +1,8 @@
 import React from "react";
-import Progressbar from "../Components/Progressbar";
-import SelectLang from "../Components/SelectLang";
-import SelectNum from "../Components/SelectNum";
-import SelectAbout from "../Components/SelectAbout";
+import Progressbar from "./Progressbar";
+import SelectLang from "./SelectLang";
+import SelectNum from "./SelectNum";
+import SelectAbout from "./SelectAbout";
 
 const backgroundStyle = {
         backgroundImage: 'url(/images/selectLangBackground.png)',

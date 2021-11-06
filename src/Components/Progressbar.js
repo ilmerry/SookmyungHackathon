@@ -1,5 +1,5 @@
 import React from "react";
-import "../Assets/SelectPage.css";
+import "../css/SelectPage.css";
 
 class Progressbar extends React.Component{
     constructor(props){

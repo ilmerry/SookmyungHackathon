@@ -6,8 +6,9 @@ import {Link} from 'react-router-dom';
 function StartPage(){
     const onClickHandler = () => {
         // 구현하자
-
+        
     }
+
 
     return (
         <div>
