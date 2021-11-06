@@ -1,9 +1,9 @@
 import './App.css';
+import SelectPage from './Pages/SelectPage';
 
 function App() {
   return (
-    <div>
-    </div>
+    <SelectPage/>
   );
 }
 
