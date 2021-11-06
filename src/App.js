@@ -5,6 +5,7 @@ import ResultPage from './Components/ResultPage';
 import SelectAbout from './Components/SelectAbout';
 import SelectNum from './Components/SelectNum';
 import SelectLang  from './Components/SelectLang';
+import SelectOthers from './Components/SelectOthers';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 
@@ -18,6 +19,7 @@ const App = ()=>{
         <Route path="/maxlen" element={<SelectNum/>}/>
         <Route path="/about" elementt={<SelectAbout/>}/>
         <Route path="/result" element={<ResultPage/>}/>
+        <Route path="/others" element={<SelectOthers/>}/>
       </Routes>
       </BrowserRouter>
     </div>

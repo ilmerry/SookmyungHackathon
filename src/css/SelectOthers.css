@@ -1,0 +1,19 @@
+
+
+.tellMe{
+    font-size: 3vw;
+    text-align: center;
+}
+
+table{
+    padding-top: 2vw;
+    margin: auto;
+}
+
+td{
+    float: left;
+    margin: 50px;
+    text-align: center;
+    font-size: 2.3vw;
+}
+
