@@ -3,15 +3,15 @@ import "../css/SelectPage.css";
 const API_URL = 'http://localhost:3001'
 
 function SelectLang (){
-    const [lanuage, setLanguage]=useState(null);
+    const [language, setLanguage]=useState(null);
     const page=2;
     var inform;
 
     // usecallback 써서 성능최적화 시키던가
-    const onClickHandler = (lang)=>{
+    const onClickHandler = async (lang)=>{
         setLanguage(lang);
-        inform = {lanuage,page};
-
+        
+        inform = {language: language};
         fetch(`${API_URL}/language`, {
             method: 'POST',
             headers: {
@@ -19,10 +19,18 @@ function SelectLang (){
             },
             body: JSON.stringify(inform),  
         })
-        .then(response => console.log(JSON.stringify(inform)))
+        .then(async res => { 
+            try {
+                const jsonRes = await res.json();
+                if (res.status === 200) {
+                    console.log(jsonRes.message);
+                }
+            } catch (err) {
+                console.log(err);
+            };
+        });
     }
    
-
     // language가 Null이 아니면 화살표 활성화하는 함수 (근데 수행 타이밍을 못찾겠음 - 변수가 바뀔때마다 검사하게 하는건 ㅇㄸ)
     // <Link to="/maxlength"></Link>
     
@@ -44,7 +52,4 @@ function SelectLang (){
     )
     
 }
-
-// onMouseOver={console.log("!!")}
-// onMouseLeave={console.log("!!")}
 export default SelectLang;
