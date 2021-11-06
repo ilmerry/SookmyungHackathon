@@ -1,0 +1,77 @@
+/*폰트 정하기*/
+
+
+.StartBG{
+    height: 70vh;
+    background-size: 100%;
+}
+
+.sen1{
+    color:white;
+    text-align: center;
+    font-size: 1.5vw;
+    padding-top: 10vh;
+    padding-bottom: 40px;
+}
+
+.sen2{
+    color:white;
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 3vw;
+    font-size: 5vw;
+}
+
+.sen3{
+    color:white;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.StartBtn{
+    color:white;
+    font-size: larger;
+    font-weight: bold;
+    width:200px;
+    height: 60px;
+    margin:auto;
+    margin-top: 40px;
+    display: block;
+    border-radius: 50px;
+    background: rgb(115,227,226);
+    background: linear-gradient(90deg, rgba(115,227,226,1) 0%, rgba(115,227,226,1) 51%, rgba(111,194,255,1) 100%);
+}
+
+
+@media screen and (max-width:768px) {
+    .StartBG{
+        background-size: 200%;
+        height: 55vh;
+    }
+
+    .sen1{
+        color:white;
+        text-align: center;
+        font-size: 3.5vw;
+        padding-top: 10vh;
+        padding-bottom: 40px;
+    }
+
+    .sen2{
+        color:white;
+        text-align: center;
+        font-weight: 700;
+        padding-top: 10px;
+        padding-bottom: 3vw;
+        font-size: 7vw;
+    }
+
+    .sen3{
+        color:white;
+        text-align: center;
+        font-size: 4vw;
+        padding-top: 5vh;
+    }
+}
+
+
