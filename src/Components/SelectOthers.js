@@ -5,6 +5,25 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root') //
 function SelectOthers() {
+
+    const [birth, setBirth]=useState(null);
+    const [name, setName ]=useState(null);
+    const [mbti, setMbti ]=useState(null);
+    const [color, setColor ]=useState(null);
+    const page=4;
+
+    const onClickBirth = ()=>{
+        
+    }
+
+    const onClickName = ()=>{
+        
+    }
+
+    const onClickColor = ()=>{
+        
+    }
+    
     const [nameModal, setNameModal] = useState(false)
     const [birthModal, setbirthModal] = useState(false)
     const [mbtiModal, setMbtiModal] = useState(false)
