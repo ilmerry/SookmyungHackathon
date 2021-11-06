@@ -1,12 +1,13 @@
 import React from 'react';
 import '../css/StartPage.css';
 import {Link} from 'react-router-dom';
+import {Button} from 'react-bootstrap';
 
 
 function StartPage(){
     const onClickHandler = () => {
         // 구현하자
-        
+        <Link to="/select"></Link>
     }
 
 
@@ -24,9 +25,9 @@ function StartPage(){
                     당신의 새로운 닉네임을 추천드립니다
                 </div>
             </div>
-            
-            <button className="StartBtn" onClick={onClickHandler}>Start</button>
-            
+            <Link to="/language">
+            <Button className="StartBtn" onClick={onClickHandler}>Start</Button>
+            </Link>
         </div>
     )
     

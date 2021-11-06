@@ -62,11 +62,41 @@ function SelectOthers() {
                             backgroundColor: 'grey'
                         },
                         content: {
-                            color: 'orange'
+                            color: '#D15593'
                         }
                     }
                 }>
-                <div>mbti</div>
+                
+                <table>
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td  onClick={() => setMbtiModal(false)}>ISTJ</td>
+                            <td>ISFJ</td>
+                            <td>INFJ</td>
+                            <td>INTJ</td>
+                        </tr>
+                        <tr>
+                            <td>ISTP</td>
+                            <td>ISFP</td>
+                            <td>INFP</td>
+                            <td>INTP</td>
+                        </tr>
+                        <tr>
+                            <td>ESTP</td>
+                            <td>ESFP</td>
+                            <td>ENFP</td>
+                            <td>ENTP</td>
+                        </tr>
+                        <tr>
+                            <td>ESTJ</td>
+                            <td>ESFJ</td>
+                            <td>ENFJ</td>
+                            <td>ENFJ</td>
+                        </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
                 <button onClick={() => setMbtiModal(false)}> 닫기</button>
             </Modal>
 
