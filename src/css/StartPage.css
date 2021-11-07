@@ -29,6 +29,7 @@
 }
 
 .StartBtn{
+    text-decoration: none;
     color:white;
     font-size: larger;
     font-weight: bold;
@@ -41,6 +42,7 @@
     background: rgb(115,227,226);
     background: linear-gradient(90deg, rgba(115,227,226,1) 0%, rgba(115,227,226,1) 51%, rgba(111,194,255,1) 100%);
 }
+
 
 
 @media screen and (max-width:768px) {

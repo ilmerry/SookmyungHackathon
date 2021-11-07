@@ -1,13 +1,18 @@
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .resultBG{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
-    padding-top: 200px;
+    padding-top: 250px;
     height: 40%; 
     width: 50%;
     margin:auto;
-    display: block;
-    border-radius: 30%;
 }
 
 .otherBtn{
@@ -20,17 +25,31 @@
     margin-top: 10px;
     background-color: #5C7BE7;
     color: white;
+    font-family: 'IM_Hyemin-Bold';
+    text-align: center;
 }
 
 .name{
     text-align: left;
     position:  fixed;
-    top: 17%;
-    left: 28vw
+    top: 20%;
+    left: 28vw;
+    font-family: 'IM_Hyemin-Bold';
 }
 
+.other_names{
+    text-align: left;
+    float: right;
+    padding-top: 1.8vw;
+    font-size: 1.5vw;
+    padding-right: 30px;
+    font-family: 'IM_Hyemin-Bold';
+    line-height: 3vw;
+}
+
+
 .ko_name{
-    font-size: 2.5vw;
+    font-size: 3vw;
 }
 
 .eng_name{
@@ -40,21 +59,15 @@
 .nameIcon{
     width: 1.3cm;
     height: 4vh;
+    
 }
 
-.other_names{
-    text-align: left;
-    float: right;
-    padding-top: 30px;
-    font-size: 1.5vw;
-    padding-right: 30px;
-}
 
 .copy_sen{
     color: gray;
     position: fixed;
     right: 30%;
-    top: 70vh;
+    top: 72%;
 }
 
 @media screen and (max-width:768px) {
@@ -62,35 +75,31 @@
    .name{
     text-align: left;
     position:  fixed;
-    top: 18%;
-    left: 28vw
+    top: 15%;
+    left: 28vw;
     }
     
     .resultBG{
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        padding-top: 20vw;
+        padding-top: 5vw;
         height: 40%; 
         width: 50%;
-        margin:auto;
-        display: block;
     }
 
     .other_names{
-        text-align: left;
-        float: right;
-        padding-top: 90px;
-        font-size: 1.5vw;
-        padding-right: 10px;
-        
+        padding-top: 20vh;
     }
 
     .copy_sen{
         color: gray;
         position: fixed;
         right: 30%;
-        top: 50%;
-        font-size: 2vw;
+        top: 40vh;
+        font-size: 1.2vw;
+    }
+
+    .nameIcon{
+        width: 1.3cm;
+        height: 1.3vh;
+        
     }
 }

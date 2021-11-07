@@ -99,9 +99,9 @@ function SelectOthers() {
                         },
                         content: {
                             color: '#D15593',
-                            width: "70%",
+                            width: "60%",
                             position: "fixed",
-                            left: "13%",
+                            left: "18%",
                         }
                     }
                     
@@ -138,7 +138,7 @@ function SelectOthers() {
                     </tbody>
                     <tfoot></tfoot>
                 </table>
-                <button onClick={() => setMbtiModal(false)}> 닫기</button>
+                
             </Modal>
 
             <Modal 

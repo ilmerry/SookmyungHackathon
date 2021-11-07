@@ -25,7 +25,7 @@ function StartPage(){
                     당신의 새로운 닉네임을 추천드립니다
                 </div>
             </div>
-            <Link to="/language">
+            <Link to="/language" style={{textDecoration: "none"}}>
             <Button className="StartBtn" onClick={onClickHandler}>Start</Button>
             </Link>
         </div>

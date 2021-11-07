@@ -58,4 +58,15 @@ table{
         margin: 50px;
         font-size: 4vw;
     }
+
+    .mbti_t{
+        font-size: 2vw;
+        padding: 18px;
+        font-family: 'IM_Hyemin-Bold';
+        font-weight: bold;
+        text-align: center;
+        margin-top: 2px;
+        padding-bottom: 40px;
+        
+    }
 }

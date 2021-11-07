@@ -18,7 +18,7 @@ function ResultPage(){
             }}>
                 <div style={{
                     backgroundImage: 'url(/assets/resultBG.png)',
-                    /*borderRadius: "30%"  이상함 */
+                    
                 }} className="resultBG">
                     <div className="name">
                         <BsPersonCircle className="nameIcon"/>
@@ -29,15 +29,15 @@ function ResultPage(){
 
                     <div className="other_names">
                         <div className="insta_name">
-                            <BsInstagram/> @turkish_rose_olivia
+                            <BsInstagram style={{width:"30px"}}/>&nbsp; @turkish_rose_olivia
                         </div>
 
                         <div className="email_name">
-                            <AiFillMail/> roselivia624@example.com
+                            <AiFillMail style={{width:"30px"}}/>&nbsp; roselivia624@example.com
                         </div>
 
                         <div className="game_name">
-                            <IoGameControllerOutline/> turkishRoselivia
+                            <IoGameControllerOutline style={{width:"30px"}}/> &nbsp;turkishRoselivia
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ function ResultPage(){
                 </div> 
                
                 <button className="otherBtn">
-                    <AiOutlineReload /> 다른 조합을 볼래요
+                    <AiOutlineReload /> &nbsp; 다른 조합을 볼래요
                 </button>
             </div>
             
