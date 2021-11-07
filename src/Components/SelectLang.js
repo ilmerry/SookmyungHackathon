@@ -4,13 +4,6 @@ import Paging from "./Paging";
 import "../css/SelectPage.css";
 const API_URL = 'http://localhost:3001'
 
-const backgroundStyle = {
-    backgroundImage: 'url(/images/selectLangBackground.png)',
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "100vh"
-}
-
 function SelectLang (){
     const [language, setLanguage]=useState(null);
     const page=2;
@@ -48,23 +41,31 @@ function SelectLang (){
     // <Link to="/maxlength"></Link>
     
     return(
-        <div style={backgroundStyle} className="css-lang">
-            <div className="css-lang">
-                <Progressbar />
-                <div className="title">언어를 선택해주세요</div>
-                <span className="btn">
-                    <button className="btn-kor"
-                        onClick={()=>onClickHandler("kor")}>
-                        한글
-                    </button>
-                    <button className="btn-eng"
-                        onClick={()=>onClickHandler("en")}>
-                        English
-                    </button>  
-                    
-                </span>
-                <Paging/>
+        <div>
+            <div style={{
+                backgroundImage: 'url(/assets/selectBG.svg)',
+                backgroundRepeat: "no-repeat",
+                
+            }} className="lang_bg">
+                <div className="css-lang">
+                    <Progressbar/>
+
+                    <div className="title">언어를 선택해주세요</div>
+
+                    <span className="btn">
+                        <button className="btn-kor"
+                            onClick={()=>onClickHandler("kor")}>
+                            한글
+                        </button>
+                        <button className="btn-eng"
+                            onClick={()=>onClickHandler("en")}>
+                            English
+                        </button>  
+                    </span>
+
+                    <Paging/>
                 </div>
+            </div>
         </div>
     )
     

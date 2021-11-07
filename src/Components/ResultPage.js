@@ -6,11 +6,12 @@ import { BsInstagram } from "react-icons/bs";
 import { AiFillMail } from "react-icons/ai";
 import { IoGameControllerOutline } from "react-icons/io5";
 
+
 function ResultPage(){
     return(
         <div>
             <div style={{
-               backgroundImage:'url(/assets/resultBGBG.png)',
+               backgroundImage:'url(/assets/svgresultBGBG.svg)',
                backgroundRepeat: "no-repeat",
                 backgroundSize: "100%",
                 height: "100vh",

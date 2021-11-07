@@ -8,52 +8,87 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-edit-text/dist/index.css';
 import Progressbar from './Progressbar';
 import Paging from './Paging';
+import "../css/SelectPage.css";
+
 
 const backgroundStyle = {
-    backgroundImage: 'url(/images/selectLangBackground.png)',
-    backgroundSize: "cover",
+    backgroundImage: 'url(/assets/selectBG.svg)',
+    backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
-    height: "100vh"
+    
 }
 
 Modal.setAppElement('#root') //
 function SelectOthers() {
 
     const [birth, setBirth]=useState(new Date());
-    const [name, setName ]=useState(null);
+    const [name, setName ]=useState("클릭하여 이름 입력");
     const [mbti, setMbti ]=useState(null);
     const [color, setColor ]=useState("#aabbcc");
     const page=4;
 
-    const onClickBirth = ()=>{
-        
-    }
-
     const onClickName = ()=>{
-        
+        console.log(name)
+    }
+    
+    const onClickBirth = ()=>{
     }
 
     const onClickColor = ()=>{
-        
     }
+
+    
+    // 정상
+    const getName = ()=>{
+        setNameModal(false)
+        let userName = document.querySelector(".js-name")
+
+        if(userName == null)
+            console.log(1)
+        else
+            setName(userName.innerText)
+        console.log(name)
+    }
+    useEffect(() => {
+        getName()
+    }, [name])
+    
+    // 정상
+    const getBirth = ()=>{
+        setbirthModal(false)
+        setBirth(birth)
+        console.log(birth)
+    }
+    useEffect(() => {
+        getBirth()
+    }, [birth])
+
+    // 정상
+    const getMbti = (value)=>{
+        setMbtiModal(false)
+        setMbti(value)
+        console.log(mbti)
+    }
+    useEffect(() => {
+        getMbti()
+    }, [mbti])
+    
+    // 정상
+    const getColor = ()=>{
+        setColor(color)
+        console.log(color)
+    }
+    useEffect(() => {
+        getColor()
+    }, [color])
     
     const [nameModal, setNameModal] = useState(false)
     const [birthModal, setbirthModal] = useState(false)
     const [mbtiModal, setMbtiModal] = useState(false)
-    const [hobbyModal, setHobbyModal] = useState(false)
     const [colorModal, setColorModal] = useState(false)
-    const [charModal, setCharModal] = useState(false)
-
-    const getDay=() => {
-        // 생일 입력 반박자 늦게 받아짐
-        console.log(birth)
-    }
-    useEffect(() => {
-        getDay()
-    }, [birth])
 
     return (
-        <div style={backgroundStyle}>
+        <div style={backgroundStyle} className="css-lang">
             <Progressbar/>
             <div className="tellMe">
                 나에 대해 알려주세요
@@ -72,13 +107,15 @@ function SelectOthers() {
                         }
                     }
                 }>
-                <div>이름</div>
-                <div>
-                    <EditText placeholder="본명 혹은 자주 쓰던 닉네임"
-                    value={name}
-                    onChange={setName}/>
+                <div className="title">나의 이름은</div>
+                <div className="css-modal-name">
+                    <EditText 
+                    className="css-et js-name" 
+                    placeholder="클릭하여 이름 입력"
+                    onChange={setName}
+                    />
+                    <button className="css-submit" onClick={()=>getName()}>확인</button>
                 </div>
-                <button onClick={() => setNameModal(false)}> 닫기</button>
             </Modal>
 
             <Modal 
@@ -94,16 +131,15 @@ function SelectOthers() {
                         }
                     }
                 }>
-                <div>생일</div>
-                <div className="css-calDiv">
+                <div className="title">내가 태어난 날</div>
+                <div className="css-modal-birth">
                     <Calendar className="css-cal"
                         onChange={setBirth}
                         value={birth}
                         maxDate={new Date()}
-                        onClickDay={()=>getDay()}
+                        onClickDay={()=>getBirth()}
                     />
                 </div>
-                <button onClick={() => setbirthModal(false)}> 닫기</button>
             </Modal>
 
             <Modal 
@@ -124,55 +160,40 @@ function SelectOthers() {
                     
                 }
                 >
-                
+                <div className="title" style={{color:'orange'}}>
+                    나의 MBTI
+                </div>
                 <table>
                     <thead></thead>
                     <tbody>
                         <tr>
-                            <td className="mbti_t" onClick={() => setMbtiModal(false)}>ISTJ</td>
-                            <td className="mbti_t">ISFJ</td>
-                            <td className="mbti_t">INFJ</td>
-                            <td className="mbti_t">INTJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("ISTJ")}>ISTJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("ISFJ")}>ISFJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("INFJ")}>INFJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("INTJ")}>INTJ</td>
                         </tr>
                         <tr>
-                            <td className="mbti_t">ISTP</td>
-                            <td className="mbti_t">ISFP</td>
-                            <td className="mbti_t">INFP</td>
-                            <td className="mbti_t">INTP</td>
+                            <td className="mbti_t" onClick={() => getMbti("ISTP")}>ISTP</td>
+                            <td className="mbti_t" onClick={() => getMbti("ISFP")}>ISFP</td>
+                            <td className="mbti_t" onClick={() => getMbti("INFP")}>INFP</td>
+                            <td className="mbti_t" onClick={() => getMbti("INTP")}>INTP</td>
                         </tr>
                         <tr>
-                            <td className="mbti_t">ESTP</td>
-                            <td className="mbti_t">ESFP</td>
-                            <td className="mbti_t">ENFP</td>
-                            <td className="mbti_t">ENTP</td>
+                            <td className="mbti_t" onClick={() => getMbti("ESTP")}>ESTP</td>
+                            <td className="mbti_t" onClick={() => getMbti("ESFP")}>ESFP</td>
+                            <td className="mbti_t" onClick={() => getMbti("ENFP")}>ENFP</td>
+                            <td className="mbti_t" onClick={() => getMbti("ENTP")}>ENTP</td>
                         </tr>
                         <tr>
-                            <td className="mbti_t">ESTJ</td>
-                            <td className="mbti_t">ESFJ</td>
-                            <td className="mbti_t">ENFJ</td>
-                            <td className="mbti_t">ENFJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("ESTJ")}>ESTJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("ESFJ")}>ESFJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("ENTJ")}>ENTJ</td>
+                            <td className="mbti_t" onClick={() => getMbti("ENFJ")}>ENFJ</td>
                         </tr>
                     </tbody>
                     <tfoot></tfoot>
                 </table>
                 
-            </Modal>
-
-            <Modal 
-                isOpen={hobbyModal} 
-                onRequestClose={() => setHobbyModal(false)}
-                style={
-                    {
-                        overlay: {
-                            backgroundColor: 'grey'
-                        },
-                        content: {
-                            color: 'orange'
-                        }
-                    }
-                }>
-                <div>취미</div>
-                <button onClick={() => setHobbyModal(false)}> 닫기</button>
             </Modal>
 
             <Modal 
@@ -188,29 +209,15 @@ function SelectOthers() {
                         }
                     }
                 }>
-                <div>색상</div>
-                <div>
-                <HexColorPicker color={color} onChange={setColor} />;
-                <HexColorInput color={color} onChange={setColor} prefixed alpha />
+                <div className="title">내가 좋아하는 컬러는</div>
+                <div className="css-modal-color">
+                    <HexColorPicker className="css-picker"
+                    color={color} onChange={setColor} />
+                    <div className="css-hex" >
+                        {color}
+                    </div>
+                    <button className="css-submit-color" onClick={()=>getColor()}>확인</button>
                 </div>
-                <button onClick={() => setColorModal(false)}> 닫기</button>
-            </Modal>
-
-            <Modal 
-                isOpen={charModal} 
-                onRequestClose={() => setCharModal(false)}
-                style={
-                    {
-                        overlay: {
-                            backgroundColor: 'grey'
-                        },
-                        content: {
-                            color: 'orange'
-                        }
-                    }
-                }>
-                <div>성격</div>
-                <button onClick={() => setCharModal(false)}> 닫기</button>
             </Modal>
 
             <table>
@@ -221,16 +228,15 @@ function SelectOthers() {
                         onClick={() => setNameModal(true)}
                         >이름</td>
                     <td className="select" onClick={() => setbirthModal(true)}>생일</td>
-                    <td className="select" onClick={() => setMbtiModal(true)}>mbti</td>
                 </tr>
                 <tr>
-                    <td className="select" onClick={() => setHobbyModal(true)}>취미</td>
+                    <td className="select" onClick={() => setMbtiModal(true)}>mbti</td>
                     <td className="select" onClick={() => setColorModal(true)}>색상</td>
-                    <td className="select" onClick={() => setCharModal(true)}>성격</td>
                 </tr>
                 </tbody>
                 <tfoot></tfoot>
             </table>
+            
             <Paging/>
         </div>
     )

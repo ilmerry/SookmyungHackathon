@@ -39,6 +39,7 @@
     margin-top: 40px;
     display: block;
     border-radius: 50px;
+    cursor: pointer;
     background: rgb(115,227,226);
     background: linear-gradient(90deg, rgba(115,227,226,1) 0%, rgba(115,227,226,1) 51%, rgba(111,194,255,1) 100%);
 }
@@ -74,6 +75,8 @@
         font-size: 4vw;
         padding-top: 5vh;
     }
+
+    
 }
 
 

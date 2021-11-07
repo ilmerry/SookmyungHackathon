@@ -7,7 +7,7 @@ import {Button} from 'react-bootstrap';
 function StartPage(){
     const onClickHandler = () => {
         // 구현하자
-        <Link to="/select"></Link>
+        window.location.href = "/language"
     }
 
 
@@ -25,9 +25,9 @@ function StartPage(){
                     당신의 새로운 닉네임을 추천드립니다
                 </div>
             </div>
-            <Link to="/language" style={{textDecoration: "none"}}>
-            <Button className="StartBtn" onClick={onClickHandler}>Start</Button>
-            </Link>
+            
+            <button className="StartBtn" onClick={onClickHandler}>Start</button>
+            
         </div>
     )
     

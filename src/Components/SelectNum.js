@@ -6,8 +6,8 @@ import "../css/SelectPage.css";
 const API_URL = 'http://localhost:3001'
 
 const backgroundStyle = {
-    backgroundImage: 'url(/images/selectLangBackground.png)',
-    backgroundSize: "cover",
+    backgroundImage: 'url(/assets/selectBG.svg)',
+    backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
     height: "100vh"
 }
@@ -76,10 +76,14 @@ function SelectNum(){
 
     
     return(
-        <div style={backgroundStyle}>
+        <div style={{
+            backgroundImage: 'url(/assets/selectBG.svg)',
+            backgroundRepeat: "no-repeat",
+            
+        }} className="lang_bg">
             <div className="css-num">
-            <Progressbar />
-            <div className="title">최대 <span className="N">{!flag? "N" :maxlength}</span>글자까지 생성합니다</div>
+            <Progressbar style={{width: "100%"}}/>
+            <div className="num_title" style={{marginBottom: "0px", marginTop: "25px"}}>최대 <span className="N">{!flag? "N" :maxlength}</span>글자까지 생성합니다</div>
             <div>
                 <tr>
                     <td><button className="keypad" onClick={()=>numButt("1")}>1</button></td>
