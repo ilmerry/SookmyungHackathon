@@ -1,9 +1,12 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const Hangul = require("hangul-js");
+const { type } = require("os");
+const request = require("request");
+const rhs = require('rhs-color');
+const fs = require('fs');
 
 var language, maxlength, birth, name, mbti, color;
-let result = new Array();
 
 // env로 보호할 예정
 var client_id = "KPC6oEv7Qv7pfNvfVIOn";
@@ -25,23 +28,23 @@ router.post('/maxlength', function(req, res){
 })
 
 
-router.get('/result', function(req, res){
+router.post('/result', function(req, res){
 
     birth = req.body.birth
     name = req.body.name
     mbti = req.body.mbti
     color = req.body.color
     
+    let result=[]
 
     function translation(lan, string) {
         var source, target;
         if (lan == "en") {
-          (source = "kor"), (target = "en");
+          (source = "ko"); (target = "en");
         } else {
-          (source = "en"), (target = "kor");
+          (source = "en"); (target = "ko");
         }
         var api_url = "https://openapi.naver.com/v1/papago/n2mt";
-        var request = require("request");
         var options = {
           url: api_url,
           form: { source: source, target: target, text: string },
@@ -50,91 +53,98 @@ router.get('/result', function(req, res){
             "X-Naver-Client-Secret": client_secret,
           },
         };
-        request.post(options, function (error, response, body) {
+        request.post(options, function (error, response, body) {  //response 말고 body 사용할것.
           if (!error && response.statusCode == 200) {
-            res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
-            res.end(body);
-            // res.writeHead, end 꼭 필수인지 모르겠음
-            return res.body.message.result.translatedText;
-            // body가 들어가는지 모르겟음
+              
+              const json = JSON.parse(body);
+              const trans = json.message.result.translatedText;
+              let nameTrans = trans.replace(/(\s*)/g, ""); // 모든 공백 제거
+              nameTrans = nameTrans.replace(',','');
+              nameTrans = nameTrans.replace('.','');
+              return nameTrans
           } else {
             res.status(response.statusCode).end();
-            console.log("error = " + response.statusCode);
           }
         });
     }
 
-    function getBirth(birth) {
-    // format:dd mmm yyyy
-    var day = birth.slice(-2); // 08
-    var month = birth.slice(2, 4); // 06
-    var year = birth.slice(0, 3); // 99
-    let month3 = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-
-    ]
-    result.push(day);
-    result.push(month);
-    result.push(year);
-    result.push(month12[parseInt(month) - 1]);
+    function getBirth(birth) {  
+        const birth_data = birth.split(' ');
+        const mmm =parseInt(birth_data[1]);
+        let month3 = [
+        "Jan","Feb","Mar",  "Apr","May","Jun",
+        "Jul","Aug","Sep",  "Oct","Nov","Dec"
+        ];
+        let season = [
+          "Spring", "Summer", "Autum", "Winter"
+        ]
+        let index;
+        switch(mmm){
+          case 3: case 4: case 5:
+            index=0; break;
+          case 6: case 7: case 8:
+            index=1; break;
+          case 9: case 10: case 11:
+            index=2; break;
+          case 12: case 1: case 2:
+            index=3; break;
+        }
+        result.push(birth_data[0]); // dd
+        result.push(birth_data[1]); // mmm
+        result.push(birth_data[2]); // yyyy
+        result.push(month3[mmm - 1]);
+        result.push(season[index]);
     }
     
-    function getName(name) {
-        // 파파고 api !! 프론트에서 한글로만 성명받는것으로 제한
+    function getName(name) { //파파고 api -> 프론트 한글성명만
 
         // 제한언어 영어이면 한글->영어로 변환
         if (language == "en") {
-            var trans = translation("en", name);
-            result.push(trans);
+          let tName=translation("en", name);
+            result.push(tName)
+          
         } else {
-            result.push(name);
+            if (name!=undefined){result.push(name);}
         }
     }
 
-  function getMbti(mbti) {
-    // 파일에서 불러오기
-    var fs = require("fs");
-    fs.readFile(`../MBTI/${mbti}`, "utf8", function (err, contents) {
-      const personalities = contents.split("\n");
-      for (i in personalities) {
-        result.push(personalities[i]);
-      }
-    });
+
+  function getMbti(language, mbti) {  
+
+    var i=0;
+    while (i < mbtijson[language][mbti].length) {
+      result.push(mbtijson[language][mbti][i]);
+      i++;
+    }
   }
-
-  function getColor(color) {
-    // #FFFFFF (hex) 들어온다고 가정
-    var colorname;
-    var request = require("request");
-    request.post(`http://thecolorapi.com/id?${color}`, function (
-      error,
-      response,
-      body
-    ) {
-      if (!error && response.statusCode == 200) {
-        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
-        colorname = req.body.name.value;
-        res.end(body);
-      } else {
-        res.status(response.statusCode).end();
-        console.log("error = " + response.statusCode);
-      }
-    });
-
+  
+  function getColor(color) { // color : hex (#없음)
+    var colorname = rhs.fromRgb("#"+color);
+    colorname = rhs.name(colorname);
+    const colors = colorname.split(' ');
+  
     if (language == "kor") {
-      var trans = translation("kor", colorname);
-      result.push(trans);
+        for (i in colors){
+            var trans = translation("kor", colors[i]);
+            if (trans!=undefined){result.push(trans);}
+        }
     } else {
-      result.push(colorname);
+        for (i in colors){
+            if(trans!=undefined){result.push(colors[i]);}
+        }
     }
   }
 
-  // 변수값들 객체로 넣고 null 인것은 객체에서 제거 후 키들만 뽑기
-  attribute = { b: birth, n: name, m: mbti, c: color };
 
+  birth="08 009 1999"
+  name="윤다빈"
+  mbti="ENFP"
+  color="F012FF"
+  language="en"
+  maxlength=10
+  
+
+  attribute = { b: birth, n: name, m: mbti, c: color };
   for (propName in attribute) {
     if (attribute[propName] == null) {
       delete attribute[propName];
@@ -146,62 +156,238 @@ router.get('/result', function(req, res){
     property.splice(random, 1);
   }
   // 속성 2개에 따른 결과 result에 저장
-  for (prop in property) {
-    if (prop == "b") { getBirth(birth);}
-    if (prop == "n") { getName(name);}
-    if (prop == "m") { getMbti(mbti);}
-    if (prop == "c") { getColor(color);}
-  }
-
-  // result 조합하는 코드
-
-  let pick1 = Math.floor(Math.random() * result.length);
-  let pick2 = Math.floor(Math.random() * result.length);
-  let new_nickname = result[pick1] + result[pick2];
-
-  // 메일과 인스타 아이디 조합하는 코드
-
-  let createNewInstaId = (new_nickname) => {
-    // 인스타 아이디 ._ 랜덤첨가
-    let pick_ = Math.floor(Math.random() * maxlength);
-    let pick_dot = Math.floor(Math.random() * maxlength);
-    let new_instaId = [
-      new_nickname.slice(0, pick_),
-      "_",
-      new_nickname.slice(pick_),
-    ].join("");
-    new_instaId = [
-      new_nickname.slice(0, pick_dot),
-      ".",
-      new_nickname.slice(pick_dot),
-    ].join("");
-    return new_instaId;
-  };
-  createNewInstaId(); // 새 인스타 아이디 반환
-  let new_email = new_nickname + "example.com";
-  let createNewGameNick = (new_nickname) => {
-    // 게임 아이디 ㅈ->z ㅣ->i ... ol별의or픔 Lr의꿈 ol수일과심순oH ∑돌쇠∽
-    if (language === "kor") {
-      // 한국어일 경우만 변환 가능
-      let new_gameNick = Hangul.disassemble(new_nickname);
-      const fs = require("fs");
-      let rawdata = fs.readFileSync("../cyworldfont.json", "utf8");
-      let words = JSON.parse(rawdata); // json->js object
-      console.log(words);
-
-      for (i in new_gameNick) {
-        if (words.hasOwnProperty(new_gameNick[i])) {
-          new_gameNick[i] = words[new_gameNick[i]];
-        }
-      }
+    for (prop in property) {
+        if (property[prop] == "b") {getBirth(birth);}
+        if (property[prop] == "n") { getName(name);}
+        if (property[prop] == "m") { getMbti(language, mbti);}
+        if (property[prop] == "c") { getColor(color);}
     }
-    return new_gameNick;
-  };
-  createNewGameNick(); // 새 게임 아이디 반환
 
-  res.send({ nickname: "결과" });
-});
+    // !!! 추후 trans + nickComb 병합 예정
+    function nickComb(){
+        let pick1 = Math.floor(Math.random() * result.length);
+        let pick2 = Math.floor(Math.random() * result.length);
+        while(pick1==pick2){
+            pick2= Math.floor(Math.random() * result.length)
+        }
+        if (language=="en"){result[pick1][0]=result[pick1][0].toLowerCase()}
+
+        let w1=result[pick1]
+        let w2=result[pick2]
+        while((w1.length+w2.length)>maxlength){
+            if(w1.length>w2.length) { w1=w1.slice(0,-1);}
+            else { w2=w2.slice(0,-1)}
+        }
+        return w1+w2
+    }
+    let newNick =nickComb()
+
+    let transNick;
+    if(language=="en"){
+        transNick=translation("ko",newNick);
+        if (transNick==undefined){transNick="숙명"}
+    }else{
+        transNick=translation("en",newNick);
+        if (transNick==undefined){transNick="sookmyung"}
+    }
+
+    let createNewInstaId = (new_nickname) => {
+    // 인스타 아이디 ._ 랜덤첨가
+        let pick_ = Math.floor(Math.random() * maxlength);
+        let pick_dot = Math.floor(Math.random() * maxlength);
+        let new_instaId = [
+            new_nickname.slice(0, pick_),
+            "_",
+            new_nickname.slice(pick_),
+        ].join("");
+        new_instaId = [
+            new_nickname.slice(0, pick_dot),
+            ".",
+            new_nickname.slice(pick_dot),
+        ].join("");
+        return new_instaId;
+    };
+
+    let instaId;
+    if (language=="en"){ instaId = createNewInstaId(newNick);}
+    else { instaId = createNewInstaId(transNick); }
+  
+    let new_email;
+    if (language=="en"){ new_email = newNick + "@example.com";}
+    else {  new_email = transNick + "@example.com"; }
+
+    let createNewGameNick = (new_nickname) => {
+        if (language === "kor") {
+            let new_gameNick = Hangul.disassemble(new_nickname);
+            let i = 0;
+            while (i<new_gameNick.length){
+                if (cyworldfont.hasOwnProperty(new_gameNick[i])) {
+                    new_gameNick[i] = cyworldfont[new_gameNick[i]];
+                    i++;
+                }
+            }
+            new_gameNick = Hangul.aassemble(new_gameNick);
+            return new_gameNick;
+        };
+    }
+    let new_gameId;
+    if (language=="en"){ new_gameId = newNick;}
+    else { new_gameId = createNewGameNick(transNick);}
+    console.log(result)
+    console.log(newNick, transNick, new_email,instaId, new_gameId)
+    return res.send({newNick, transNick,new_email, instaId, new_gameId})
+})
+
+
+  
+
+
+const mbtijson = {
+  "en":{
+      "INTJ":[
+          "INTJ", "Inspector", "Quiet", "Reflective", "Practical",
+          "Action", "Objective", "Rational", "Logical", "Decisive",
+          "Plan", "Rigid"
+      ],
+      "INTP":[
+          "INTP"
+
+      ],
+      "ENTJ":[
+          "ENTJ", "supervisor", "Energizing", "Communicative", "Practical",
+          "Objective", "Rational", "Logical", "Decisive", "planned",
+          "Rigid"  
+      ],
+      "ENTP":[
+          "ENTP", "Visionary", "Energizing", "Communicative", "Open", "Strategic",
+          "Future", "Objective", "Rational", "Logical", "Flexible",
+          "Curious", "Informal", "Assertive", "Competitive"
+      ],
+      "INFJ":[
+          "INFJ"
+      ],
+      "INFP":[
+          "INFP"
+      ],
+      "ENFJ":[
+          "ENFJ", "Teacher", "Energizing", "Communicative", "Open",
+          "Strategic", "Future", "Empathetic", "Cooperative", "Loyal",
+          "Flexible", "Curious", "Informal"
+      ],
+      "ENFP":[
+          "ENFP", "Champion", "Energizing", "Communicative", "Open",
+          "Strategic", "Future", "Empathetic", "Cooperative", "Loyal",
+          "Flexible", "Curious", "Informal", "Innovation", "Imaginative",
+          "Enthusiastic", "Expressive"
+      ],
+      "ISTJ":[
+          "ISTJ", "Inspector", "Quiet", "Reflective", "Practical",
+          "Action", "Objective", "Rational", "Logical", "Decisive",
+          "Plan", "Rigid"
+      ],
+      "ISFJ":[
+          "ISFJ", "Protector", "Quiet", "Reflective", "Practical",
+          "Action", "Empathetic", "Cooperative", "Loyal", "Decisive",
+          "Plans", "Rigid"
+      ],
+      "ESTJ":[
+          "ESTJ", "supervisor", "Energizing", "Communicative", "Practical",
+          "Objective", "Rational", "Logical", "Decisive", "planned",
+          "Rigid"
+      ],
+      "ESFJ":[
+          "ESFJ"
+      ],
+      "ISTP":[
+          "ISTP", "Crafter", "Quiet", "Reflective", "Practical",
+          "Action", "Objective", "Rational", "Logical", "Flexible",
+          "Curious", "Informal"
+      ],
+      "ISFP":[
+          "ISFP", "Adventurer", "Composer", "Quiet", "Reflective",
+          "Practical", "Action", "Empathetic", "Cooperative", "Loyal",
+          "Flexible", "Curious", "Informal"
+      ],
+      "ESTP":[
+          "ESTP"
+      ],
+      "ESFP":[
+          "ESFP"
+          
+      ]
+  },
+  "kor":{
+      "INTJ":[
+
+      ],
+      "INTP":[
+
+      ],
+      "ENTJ":[
+          "대담한", "통솔", "시간엄수", "직관", "용기",
+          "진취적인", "결정력", "냉철한", "판단력", "이성적",
+          "의지력", "사회성", "성취"
+      ],
+      "ENTP":[
+          "뜨거운", "논쟁", "타협", "자주적", "비판",
+          "별난", "이념", "결단력", "선의", "독립적인",
+          "자유분방한", "주체"
+      ],
+      "INFJ":[
+          
+      ],
+      "INFP":[
+          
+      ],
+      "ENFJ":[
+          
+      ],
+      "ENFP":[
+          "재기발랄", "활동가", "자유로운", "활발", "매력",
+          "인정", "리더", "용기", "상상"
+      ],
+      "ISTJ":[
+          
+      ],
+      "ISFJ":[
+          
+      ],
+      "ESTJ":[
+          "엄격한", "관리자", "논리적인", "체계적인", "효율적인", 
+          "성실함", "추진력",  "현실적",  "책임감"
+      ],
+      "ESFJ":[
+          
+      ],
+      "ISTP":[
+          
+      ],
+      "ISFP":[
+          
+      ],
+      "ESTP":[
+          "모험", "사업가", "친근한", "직설적", "기회",
+          "열정", "활력", "충만한", "영감", "설득력",
+          "타고난", "리더"
+      ],
+      "ESFP":[
+          
+      ]
+  }
+}
+
+const cyworldfont = {
+   
+    "ㄱ": "7",
+    "ㄴ": "L",
+    "ㄹ": "z",
+    "ㅇ": "o",
+    "ㅈ": "z",
+    
+    
+    "ㅏ": "r",
+    "ㅡ": "_",
+    "ㅣ": "i"
+}
 
 module.exports = router;
-
-

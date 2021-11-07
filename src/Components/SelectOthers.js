@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../css/SelectOthers.css';
 import Modal from 'react-modal';
 import Calendar from 'react-calendar';
@@ -21,7 +21,7 @@ function SelectOthers() {
     const generateNick = ()=>{
 
         const inform = {birth, name, mbti, color};
-        fetch(`${API_URL}/`, {
+        fetch(`${API_URL}/result`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,8 +30,13 @@ function SelectOthers() {
         })
         .then(async res => { 
             try {
+                const jsonRes = await res.json();
                 // 닉네임으로 응답이 오면 받고 다음페이지로 넘어가는 코드 수행
-
+                console.log(jsonRes.newNick)
+                console.log(jsonRes.transNick)
+                console.log(jsonRes.instaId)
+                console.log(jsonRes.new_email)
+                console.log(jsonRes.new_gameId)
             } catch (err) {
                 console.log(err);
             };
