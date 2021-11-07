@@ -23,7 +23,7 @@ function ResultPage(){
 
             }}>
                 <img 
-                    src={require('../seekm_logo1.png').default} 
+                    src={require('../SEEKMLogo.png').default} 
                     alt='' 
                     className="logo"
                     onClick={onclickLogo}
