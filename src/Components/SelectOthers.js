@@ -46,9 +46,10 @@ function SelectOthers() {
 
     const getDay=() => {
         // 생일 입력 반박자 늦게 받아짐
+        console.log(birth)
     }
     useEffect(() => {
-        console.log(birth);
+        getDay()
     }, [birth])
 
     return (
