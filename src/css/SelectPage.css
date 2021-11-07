@@ -32,6 +32,9 @@
     border-radius: 0px;
 }
 
+
+
+
 .css-lang{
     font-family: 'IM_Hyemin-Bold';
     position: relative;
@@ -106,9 +109,10 @@
     margin: 50px;
 }
 
-
-
-
+.btn-clicked{
+    background-color:#6C60BF;
+    color:white;
+}
 
 
 .css-num{
@@ -143,9 +147,6 @@
     color:white;
     transition-duration: 0.4s;
 }
-
-
-
 
 
 

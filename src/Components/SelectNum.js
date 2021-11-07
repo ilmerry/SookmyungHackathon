@@ -20,6 +20,12 @@ function SelectNum(){
     const page=3;
 
     const onClickHandler = (len)=>{
+        // 다음버튼 활성화
+        let arrowRgiht = document.querySelector(".arrow-right")
+        arrowRgiht.style.color = "#710273"
+        arrowRgiht.classList.remove("clickunable")
+        arrowRgiht.classList.add("clickable")
+
         setMaxlength(len)
         var inform = {'maxlength':maxlength}
         fetch(`${API_URL}/maxlength`, {
@@ -82,7 +88,7 @@ function SelectNum(){
             
         }} className="lang_bg">
             <div className="css-num">
-            <Progressbar style={{width: "100%"}}/>
+            <Progressbar min={40} max={70} style={{width: "100%"}}/>
             <div className="num_title" style={{marginBottom: "0px", marginTop: "25px"}}>최대 <span className="N">{!flag? "N" :maxlength}</span>글자까지 생성합니다</div>
             <div>
                 <tr>
@@ -104,9 +110,7 @@ function SelectNum(){
                     <td><button className="keypad" onClick={()=>{delButt()}}>삭제</button></td> 
                     <td><button className="keypad" onClick={()=>numButt("0")}>0</button></td>
                     <td>
-                        <Link to="/others">
-                            <button className="keypad" onClick={()=>onClickHandler(maxlength)}>확인</button>
-                        </Link>
+                        <button className="keypad" onClick={()=>onClickHandler(maxlength)}>확인</button>
                     </td>
                 </tr>
             </div>

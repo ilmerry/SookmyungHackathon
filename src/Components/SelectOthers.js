@@ -90,7 +90,7 @@ function SelectOthers() {
 
     return (
         <div style={backgroundStyle} className="css-lang">
-            <Progressbar/>
+            <Progressbar min={70} max={100}/>
             <div className="tellMe">
                 나에 대해 알려주세요
             </div>
