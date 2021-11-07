@@ -101,9 +101,9 @@ router.post('/result', function(req, res){
         // 제한언어 영어이면 한글->영어로 변환
         if (language == "en") {
           let tName=translation("en", name);
-            result.push(tName)
-          
+          if (name!=undefined) {result.push(tName)}
         } else {
+            let tName= translation("ko",name)
             if (name!=undefined){result.push(name);}
         }
     }
@@ -119,7 +119,7 @@ router.post('/result', function(req, res){
   }
   
   function getColor(color) { // color : hex (#없음)
-    var colorname = rhs.fromRgb("#"+color);
+    var colorname = rhs.fromRgb(color);
     colorname = rhs.name(colorname);
     const colors = colorname.split(' ');
   
@@ -135,14 +135,14 @@ router.post('/result', function(req, res){
     }
   }
 
-
-  birth="08 009 1999"
-  name="윤다빈"
-  mbti="ENFP"
-  color="F012FF"
-  language="en"
-  maxlength=10
-  
+  function checkEng(str){ 
+      const regExp = /[a-zA-Z]/g; // 영어 
+      if(regExp.test(str)){ 
+          return true; 
+        }else{ 
+            return false;
+         } 
+    }
 
   attribute = { b: birth, n: name, m: mbti, c: color };
   for (propName in attribute) {
@@ -163,83 +163,105 @@ router.post('/result', function(req, res){
         if (property[prop] == "c") { getColor(color);}
     }
 
-    // !!! 추후 trans + nickComb 병합 예정
-    function nickComb(){
-        let pick1 = Math.floor(Math.random() * result.length);
-        let pick2 = Math.floor(Math.random() * result.length);
-        while(pick1==pick2){
-            pick2= Math.floor(Math.random() * result.length)
+        ////-->변경
+        let new_nick, t_nick;
+        let instaId;
+        let email;
+        let gameId;
+        //makeNick(new_nick, t_nick);
+
+        /*
+        if (language == "en") {
+        instaId = createNewInstaId(new_nick);
+        email = new_nick + "@example.com";
+        gameId = new_nick;
+        } else {
+        instaId = createNewInstaId(t_nick);
+        email = t_nick + "@example.com";
+        gameId = createNewGameNick(t_nick);
         }
-        if (language=="en"){result[pick1][0]=result[pick1][0].toLowerCase()}
+        */
 
-        let w1=result[pick1]
-        let w2=result[pick2]
-        while((w1.length+w2.length)>maxlength){
-            if(w1.length>w2.length) { w1=w1.slice(0,-1);}
-            else { w2=w2.slice(0,-1)}
-        }
-        return w1+w2
-    }
-    let newNick =nickComb()
-
-    let transNick;
-    if(language=="en"){
-        transNick=translation("ko",newNick);
-        if (transNick==undefined){transNick="숙명"}
-    }else{
-        transNick=translation("en",newNick);
-        if (transNick==undefined){transNick="sookmyung"}
-    }
-
-    let createNewInstaId = (new_nickname) => {
-    // 인스타 아이디 ._ 랜덤첨가
+        // ** new_nick, t_nick, insta_id, game_id
+        let makeNick = function (new_nick, t_nick) {
+            let pick1 = Math.floor(Math.random() * result.length);
+            let pick2 = Math.floor(Math.random() * result.length);
+             while (pick1 === pick2){
+                pick2 = Math.floor(Math.random() * result.length);
+             };
+            if (language === "en") {
+                t_pick1 = translation("en", result[pick1]);
+                t_pick2 = translation("en", result[pick2]);
+            } else {
+                // language = "kor"
+                t_pick1 = translation("kor", result[pick1]);
+                t_pick2 = translation("kor", result[pick2]);
+            }
+            new_nick = nickComb(maxlength, result[pick1], result[pick2]);
+            if(t_pick1!=undefined||t_pick2!=undefined){
+                t_nick = nickComb(maxlength, t_pick1, t_pick2);
+            }else{
+                if(language==='en'){
+                    t_nick="sookmyung"
+                } else {
+                    t_nick = "숙명"
+                }
+            }
+        };
+        let nickComb = function (limit, p1, p2) {
+            let length = result[p1].length + result[p2].length;
+            while (length > limit) {
+                if (result[p1].length > result[p2].length) {
+                    a.slice(0, -1);
+                } else {
+                    b.slice(0, -1);
+                }
+            }
+            if (language == "en") {
+                // 영어 시작 소문자
+                result[p1][0] = result[p1][0].toLowerCase();
+            }
+            return result[p1] + result[p2];
+        };
+        makeNick(new_nick, t_nick);
+        
+        let createNewInstaId = (nickname) => {
+        // 인스타 아이디 ._ 랜덤첨가
         let pick_ = Math.floor(Math.random() * maxlength);
         let pick_dot = Math.floor(Math.random() * maxlength);
-        let new_instaId = [
-            new_nickname.slice(0, pick_),
-            "_",
-            new_nickname.slice(pick_),
-        ].join("");
-        new_instaId = [
-            new_nickname.slice(0, pick_dot),
-            ".",
-            new_nickname.slice(pick_dot),
-        ].join("");
+        let new_instaId = [nickname.slice(0, pick_), "_", nickname.slice(pick_)].join("");
+        new_instaId = [nickname.slice(0, pick_dot), ".", nickname.slice(pick_dot)].join("");
         return new_instaId;
-    };
-
-    let instaId;
-    if (language=="en"){ instaId = createNewInstaId(newNick);}
-    else { instaId = createNewInstaId(transNick); }
-  
-    let new_email;
-    if (language=="en"){ new_email = newNick + "@example.com";}
-    else {  new_email = transNick + "@example.com"; }
-
-    let createNewGameNick = (new_nickname) => {
+        };
+        let createNewGameNick = (nickname) => {
         if (language === "kor") {
-            let new_gameNick = Hangul.disassemble(new_nickname);
+            let new_gameNick = Hangul.disassemble(nickname);
             let i = 0;
-            while (i<new_gameNick.length){
-                if (cyworldfont.hasOwnProperty(new_gameNick[i])) {
-                    new_gameNick[i] = cyworldfont[new_gameNick[i]];
-                    i++;
-                }
+            while (i < new_gameNick.length) {
+            if (cyworldfont.hasOwnProperty(new_gameNick[i])) {
+                new_gameNick[i] = cyworldfont[new_gameNick[i]];
+                i++;
+            }
             }
             new_gameNick = Hangul.aassemble(new_gameNick);
             return new_gameNick;
+        }
         };
-    }
-    let new_gameId;
-    if (language=="en"){ new_gameId = newNick;}
-    else { new_gameId = createNewGameNick(transNick);}
-    console.log(result)
-    console.log(newNick, transNick, new_email,instaId, new_gameId)
-    return res.send({newNick, transNick,new_email, instaId, new_gameId})
+
+        if (language == "en") {
+            instaId = createNewInstaId(new_nick);
+            email = new_nick + "@example.com";
+            gameId = new_nick;
+            } else {
+            instaId = createNewInstaId(t_nick);
+            email = t_nick + "@example.com";
+            gameId = createNewGameNick(t_nick);
+            }
+        ////--> 변경 끝
+        return res.send({new_nick, t_nick, email, instaId, gameId, 
+        language, maxlength, birth, name, mbti, color })
 })
 
-
-  
 
 
 const mbtijson = {

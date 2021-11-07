@@ -3,14 +3,19 @@ import '../css/SelectOthers.css';
 import Modal from 'react-modal';
 import Calendar from 'react-calendar';
 import {EditText} from 'react-edit-text';
-import { HexColorPicker, HexColorInput  } from "react-colorful";
+import { HexColorPicker  } from "react-colorful";
+import { ChromePicker } from 'react-color';
 import 'react-calendar/dist/Calendar.css';
 import 'react-edit-text/dist/index.css';
 import Progressbar from './Progressbar';
 import Paging from './Paging';
 import "../css/SelectPage.css";
+import {Link} from 'react-router-dom';
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const API_URL = 'http://localhost:3001'
+
+let new_nick,trans_nick, new_email, insta_id, new_game, language, maxlen
 
 const backgroundStyle = {
     backgroundImage: 'url(/assets/selectBG.svg)',
@@ -25,7 +30,7 @@ function SelectOthers() {
     const [birth, setBirth]=useState(new Date());
     const [name, setName ]=useState("클릭하여 이름 입력");
     const [mbti, setMbti ]=useState(null);
-    const [color, setColor ]=useState(null);
+    const [color, setColor ]=useState("#aabbcc");
    
 
     // 4개중에 2개 이하가 Null 일때 결과보기 버튼 활성화
@@ -44,7 +49,14 @@ function SelectOthers() {
             try {
                 const jsonRes = await res.json();
                 // 닉네임으로 응답이 오면 받고 다음페이지로 넘어가는 코드 수행
-    
+                new_nick = jsonRes.new_nick
+                trans_nick = jsonRes.t_nick
+                new_email = jsonRes.email
+                insta_id = jsonRes.instaId
+                new_game = jsonRes.gameId
+                language = jsonRes.language
+                maxlen =jsonRes.maxlength
+                console.log(new_nick, trans_nick, new_email, insta_id, new_game)
                 
             } catch (err) {
                 console.log(err);
@@ -52,17 +64,11 @@ function SelectOthers() {
         });
     }
 
-    const onClickName = ()=>{
-        console.log(name)
-    }
-    
-    const onClickBirth = ()=>{
+    const settingName= ()=>{
+        var regex= /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+        
     }
 
-    const onClickColor = ()=>{
-    }
-
-    
     // 정상
     const getName = ()=>{
         setNameModal(false)
@@ -106,6 +112,12 @@ function SelectOthers() {
     useEffect(() => {
         getColor()
     }, [color])
+
+    const onClickHandler = ()=>{
+        setColor(color)
+        console.log(color)
+        setColorModal(false)
+    }
     
     const [nameModal, setNameModal] = useState(false)
     const [birthModal, setbirthModal] = useState(false)
@@ -113,6 +125,7 @@ function SelectOthers() {
     const [colorModal, setColorModal] = useState(false)
 
     return (
+        
         <div style={backgroundStyle} className="css-lang">
             <Progressbar min={70} max={100}/>
             <div className="tellMe">
@@ -136,7 +149,7 @@ function SelectOthers() {
                 <div className="css-modal-name">
                     <EditText 
                     className="css-et js-name" 
-                    placeholder="클릭하여 이름 입력"
+                    placeholder="한글이름"
                     onChange={setName}
                     />
                     <button className="css-submit" onClick={()=>getName()}>확인</button>
@@ -238,10 +251,13 @@ function SelectOthers() {
                 <div className="css-modal-color">
                     <HexColorPicker className="css-picker"
                     color={color} onChange={setColor} />
-                    <div className="css-hex" >
-                        {color}
+                    <div className="css-hex" style={{
+                        color:`${color}`,
+                        fontWeight:"bolder"
+                        }} >
+                        🎨 {color.substring(1)}
                     </div>
-                    <button className="css-submit-color" onClick={()=>getColor()}>확인</button>
+                    <button className="css-submit-color" onClick={()=>onClickHandler()}>확인</button>
                 </div>
             </Modal>
 
@@ -262,7 +278,17 @@ function SelectOthers() {
                 <tfoot></tfoot>
             </table>
             <button onClick={()=>{generateNick()}}>결과</button>
-            <Paging/>
+            <span className="css-paging">
+                <Link to="/others">
+                    <FaArrowLeft className="arrow arrow-left" size={45} />
+                </Link>
+                <Link to={{pathname:"/result", state:{ 
+                    newNick:new_nick, transNick:trans_nick, newEmail:new_email, instaId:insta_id, newGame:new_game, language:language, maxlen:maxlen,
+                    birth: birth, name: name, mbti:mbti, color:color
+                }}}>
+                    <FaArrowRight className="arrow arrow-right clickable" size={45} />
+                </Link>
+            </span>
         </div>
     )
 
@@ -270,3 +296,5 @@ function SelectOthers() {
 
 
 export default SelectOthers;
+
+

@@ -8,12 +8,21 @@ import { AiFillMail } from "react-icons/ai";
 import { IoGameControllerOutline } from "react-icons/io5";
 
 
-function ResultPage(){
+function ResultPage({location}){
     const onclickLogo = () => {
         window.location.href = "/"
     }
-    
-    return(
+
+     
+    console.log(location)
+
+//    export default function GuidePage({ location }) {
+//   const answers = location.state.answer;
+//   const mbti = location.state.mbti;
+
+//   return ;
+// }
+     return(
         <div>
             <div style={{
                backgroundImage:'url(/assets/svgresultBGBG.svg)',
