@@ -75,7 +75,6 @@ function SelectOthers() {
     
     // 정상
     const getColor = ()=>{
-        setColorModal(false)
         setColor(color)
         console.log(color)
     }
