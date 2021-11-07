@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/ResultPage.css';
+import '../css/StartPage.css';
 import { AiOutlineReload } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
@@ -8,6 +9,10 @@ import { IoGameControllerOutline } from "react-icons/io5";
 
 
 function ResultPage(){
+    const onclickLogo = () => {
+        window.location.href = "/"
+    }
+    
     return(
         <div>
             <div style={{
@@ -17,6 +22,13 @@ function ResultPage(){
                 height: "100vh",
 
             }}>
+                <img 
+                    src={require('../seekm_logo1.png').default} 
+                    alt='' 
+                    className="logo"
+                    onClick={onclickLogo}
+                    style={{cursor:"pointer"}}
+                    />
                 <div style={{
                     backgroundImage: 'url(/assets/resultBG.png)',
                     

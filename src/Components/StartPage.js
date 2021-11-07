@@ -1,13 +1,15 @@
 import React from 'react';
 import '../css/StartPage.css';
-import {Link} from 'react-router-dom';
-import {Button} from 'react-bootstrap';
+import Footer from './Footer';
 
 
 function StartPage(){
     const onClickHandler = () => {
-        // 구현하자
         window.location.href = "/language"
+    }
+
+    const onclickLogo = () => {
+        window.location.href = "/"
     }
 
 
@@ -18,6 +20,12 @@ function StartPage(){
                 backgroundRepeat: "no-repeat",
                 
             }} className="StartBG">
+                <img 
+                    src={require('../seekm_logo1.png').default} 
+                    alt='' 
+                    className="logo"
+                    onClick={onclickLogo}
+                    style={{cursor:"pointer"}}/>
                 <div className="sen1">Don't waste your time thinking about nicknames!</div>
                 <div className="sen2"> 나의 또다른 숙명(宿名)</div>
                 <div className="sen3">
@@ -27,7 +35,7 @@ function StartPage(){
             </div>
             
             <button className="StartBtn" onClick={onClickHandler}>Start</button>
-            
+            <Footer/>
         </div>
     )
     
