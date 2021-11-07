@@ -6,10 +6,11 @@ import {EditText} from 'react-edit-text';
 import { HexColorPicker, HexColorInput  } from "react-colorful";
 import 'react-calendar/dist/Calendar.css';
 import 'react-edit-text/dist/index.css';
-const API_URL = 'http://localhost:3001'
 import Progressbar from './Progressbar';
 import Paging from './Paging';
 import "../css/SelectPage.css";
+
+const API_URL = 'http://localhost:3001'
 
 const backgroundStyle = {
     backgroundImage: 'url(/assets/selectBG.svg)',
@@ -43,19 +44,13 @@ function SelectOthers() {
             try {
                 const jsonRes = await res.json();
                 // 닉네임으로 응답이 오면 받고 다음페이지로 넘어가는 코드 수행
-                console.log(jsonRes.newNick)
-                console.log(jsonRes.transNick)
-                console.log(jsonRes.instaId)
-                console.log(jsonRes.new_email)
-                console.log(jsonRes.new_gameId)
+    
+                
             } catch (err) {
                 console.log(err);
             };
         });
     }
-
-    const [color, setColor ]=useState("#D15593");
-    const page=4;
 
     const onClickName = ()=>{
         console.log(name)
