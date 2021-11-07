@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/StartPage.css';
+import Footer from './Footer';
 
 
 function StartPage(){
@@ -34,7 +35,7 @@ function StartPage(){
             </div>
             
             <button className="StartBtn" onClick={onClickHandler}>Start</button>
-            
+            <Footer/>
         </div>
     )
     
