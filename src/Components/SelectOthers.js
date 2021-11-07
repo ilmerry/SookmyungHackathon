@@ -239,6 +239,7 @@ function SelectOthers() {
             </table>
             
             <Paging/>
+            {/*<button className="new_name_btn">새로운 이름 <br/>생성하기</button>*/}
         </div>
     )
 

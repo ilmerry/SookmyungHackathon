@@ -125,6 +125,23 @@ table{
     cursor: pointer;
 }
 
+.new_name_btn{
+    border-radius: 50px;
+    font-family: 'IM_Hyemin-Bold';
+    text-align: center;
+    left: 30%;
+    width: 150px;
+    height: 70px;
+    font-size: 1.2vw;
+    cursor: pointer;
+    position: absolute ;
+    /*top: 87%;*/
+    margin-left: 50vw;
+    margin-top: 40vw;
+    
+    
+}
+
 @media screen and (max-width:768px) {
     .tellMe{
         font-size: 5vw;
