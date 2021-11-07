@@ -1,6 +1,16 @@
-/*폰트 정하기*/
+@font-face {
+    font-family: 'KOTRA_BOLD-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
-
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .StartBG{
     height: 70vh;
     background-size: 100%;
@@ -12,6 +22,7 @@
     font-size: 1.5vw;
     padding-top: 10vh;
     padding-bottom: 40px;
+    font-weight:600;
 }
 
 .sen2{
@@ -20,28 +31,39 @@
     font-weight: 700;
     padding-bottom: 3vw;
     font-size: 5vw;
+    font-family: 'KOTRA_BOLD-Bold';
 }
 
 .sen3{
     color:white;
     text-align: center;
     font-size: 2vw;
+    font-family: 'BMJUA';
 }
 
 .StartBtn{
+    text-decoration: none;
     color:white;
     font-size: larger;
     font-weight: bold;
     width:200px;
     height: 60px;
     margin:auto;
-    margin-top: 40px;
+    margin-top: 30px;
     display: block;
     border-radius: 50px;
+    cursor: pointer;
     background: rgb(115,227,226);
     background: linear-gradient(90deg, rgba(115,227,226,1) 0%, rgba(115,227,226,1) 51%, rgba(111,194,255,1) 100%);
 }
 
+.logo{
+    position: fixed;
+    padding-left: 1vw;
+    padding-top: 1vw;
+    width: 12vw;
+    height: 7vw;
+}
 
 @media screen and (max-width:768px) {
     .StartBG{
@@ -72,6 +94,15 @@
         font-size: 4vw;
         padding-top: 5vh;
     }
+
+    .logo{
+        position: fixed;
+        padding-left: 1vw;
+        padding-top: 1vw;
+        width: 20vw;
+        height: 10vw;
+    }
+    
 }
 
 

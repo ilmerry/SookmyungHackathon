@@ -1,24 +1,37 @@
 import React from 'react';
 import '../css/ResultPage.css';
+import '../css/StartPage.css';
 import { AiOutlineReload } from "react-icons/ai";
 import { BsPersonCircle } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { AiFillMail } from "react-icons/ai";
 import { IoGameControllerOutline } from "react-icons/io5";
 
+
 function ResultPage(){
+    const onclickLogo = () => {
+        window.location.href = "/"
+    }
+    
     return(
         <div>
             <div style={{
-               backgroundImage:'url(/assets/resultBGBG.png)',
+               backgroundImage:'url(/assets/svgresultBGBG.svg)',
                backgroundRepeat: "no-repeat",
                 backgroundSize: "100%",
                 height: "100vh",
 
             }}>
+                <img 
+                    src={require('../seekm_logo1.png').default} 
+                    alt='' 
+                    className="logo"
+                    onClick={onclickLogo}
+                    style={{cursor:"pointer"}}
+                    />
                 <div style={{
                     backgroundImage: 'url(/assets/resultBG.png)',
-                    /*borderRadius: "30%"  이상함 */
+                    
                 }} className="resultBG">
                     <div className="name">
                         <BsPersonCircle className="nameIcon"/>
@@ -29,15 +42,15 @@ function ResultPage(){
 
                     <div className="other_names">
                         <div className="insta_name">
-                            <BsInstagram/> @turkish_rose_olivia
+                            <BsInstagram style={{width:"30px"}}/>&nbsp; @turkish_rose_olivia
                         </div>
 
                         <div className="email_name">
-                            <AiFillMail/> roselivia624@example.com
+                            <AiFillMail style={{width:"30px"}}/>&nbsp; roselivia624@example.com
                         </div>
 
                         <div className="game_name">
-                            <IoGameControllerOutline/> turkishRoselivia
+                            <IoGameControllerOutline style={{width:"30px"}}/> &nbsp;turkishRoselivia
                         </div>
                     </div>
                 </div>
@@ -47,7 +60,7 @@ function ResultPage(){
                 </div> 
                
                 <button className="otherBtn">
-                    <AiOutlineReload /> 다른 조합을 볼래요
+                    <AiOutlineReload /> &nbsp; 다른 조합을 볼래요
                 </button>
             </div>
             

@@ -1,7 +1,16 @@
 import React, {useState, useEffect} from "react";
+import {Link} from 'react-router-dom';
+import Progressbar from "./Progressbar";
+import Paging from "./Paging";
 import "../css/SelectPage.css";
 const API_URL = 'http://localhost:3001'
 
+const backgroundStyle = {
+    backgroundImage: 'url(/assets/selectBG.svg)',
+    backgroundSize: "100%",
+    backgroundRepeat: "no-repeat",
+    height: "100vh"
+}
 let flag=false;
 
 function SelectNum(){
@@ -11,6 +20,12 @@ function SelectNum(){
     const page=3;
 
     const onClickHandler = (len)=>{
+        // 다음버튼 활성화
+        let arrowRgiht = document.querySelector(".arrow-right")
+        arrowRgiht.style.color = "#710273"
+        arrowRgiht.classList.remove("clickunable")
+        arrowRgiht.classList.add("clickable")
+
         setMaxlength(len)
         var inform = {'maxlength':maxlength}
         fetch(`${API_URL}/maxlength`, {
@@ -67,8 +82,14 @@ function SelectNum(){
 
     
     return(
-        <div className="css-num">
-            <div className="title">최대 <span className="N">{!flag? "N" :maxlength}</span>글자까지 생성합니다</div>
+        <div style={{
+            backgroundImage: 'url(/assets/selectBG.svg)',
+            backgroundRepeat: "no-repeat",
+            
+        }} className="lang_bg">
+            <div className="css-num">
+            <Progressbar min={40} max={70} style={{width: "100%"}}/>
+            <div className="num_title" style={{marginBottom: "0px", marginTop: "25px"}}>최대 <span className="N">{!flag? "N" :maxlength}</span>글자까지 생성합니다</div>
             <div>
                 <tr>
                     <td><button className="keypad" onClick={()=>numButt("1")}>1</button></td>
@@ -88,8 +109,12 @@ function SelectNum(){
                 <tr>
                     <td><button className="keypad" onClick={()=>{delButt()}}>삭제</button></td> 
                     <td><button className="keypad" onClick={()=>numButt("0")}>0</button></td>
-                    <td><button className="keypad" onClick={()=>onClickHandler(maxlength)}>확인</button></td>
+                    <td>
+                        <button className="keypad" onClick={()=>onClickHandler(maxlength)}>확인</button>
+                    </td>
                 </tr>
+            </div>
+            <Paging />
             </div>
         </div>
     );

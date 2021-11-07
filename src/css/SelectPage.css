@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .main{
     display: flex;
     justify-content: center;
@@ -15,7 +22,7 @@
 }
 
 .css-pgbar::-webkit-progress-bar{
-    background-color: rgb(185, 185, 185);
+    background-color: #C4C4C4;
     margin-top: -5px;
     border-radius: 0px;
 }
@@ -25,25 +32,33 @@
     border-radius: 0px;
 }
 
+
+
+
 .css-lang{
+    font-family: 'IM_Hyemin-Bold';
     position: relative;
-    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    display: flex;
 }
 
 .title{
     text-align: center;
-    font-size: 60px;
+    padding-bottom: 30px;
+    font-size: 5vw;
+}
+
+.num_title{
+    text-align: center;
+    padding-bottom: 1vw;
+    font-size: 4vw;
 }
 
 .css-lang .title{
     margin-top: 25vh;
-}
-
-.css-about .title{
-    margin-top: 5vh;
+    margin-bottom: 20px;
 }
 
 .css-lang .btn{
@@ -53,13 +68,15 @@
     align-items: center;
     flex-direction: row;
     cursor: pointer;
+    margin-bottom: 15vh;
 }
 
 .btn-kor{
-    border-radius: 20px;
+    font-family: 'IM_Hyemin-Bold';
+    border-radius: 50px;
     margin: 20px;
     cursor: pointer;
-    width: 100px;
+    width: 16vw;
     height: 80px;
     font-size: 30px;
     border: 5px solid #6C60BF;
@@ -68,10 +85,11 @@
 }
 
 .btn-eng{
-    border-radius: 20px;
+    font-family: 'IM_Hyemin-Bold';
+    border-radius: 50px;
     margin: 20px;
     cursor: pointer;
-    width: 100px;
+    width: 16vw;
     height: 80px;
     font-size: 30px;
     border: 5px solid #6C60BF;
@@ -85,7 +103,20 @@
     transition-duration: 0.4s;
 }
 
+
+.category{
+    text-align: center;
+    margin: 50px;
+}
+
+.btn-clicked{
+    background-color:#6C60BF;
+    color:white;
+}
+
+
 .css-num{
+    font-family: 'IM_Hyemin-Bold';
     position: relative;
     display: flex;
     justify-content: center;
@@ -94,17 +125,20 @@
 } 
 
 .css-num .title{
-    margin-top: 40px;
+    margin-top: 10vh;
     margin-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
 }
 
 .keypad{
+    font-family: 'IM_Hyemin-Bold';
     border-radius: 50%;
-    margin: 20px;
+    margin: 14px;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
-    font-size: 30px;
+    width: 75px;
+    height: 75px;
+    font-size: 23px;
     border: 0px solid #6C60BF;
 }
 
@@ -114,15 +148,83 @@
     transition-duration: 0.4s;
 }
 
-.css-about{
+
+
+
+.css-paging{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    margin-bottom: 8vh;
 }
 
-.category{
-    text-align: center;
-    margin: 50px;
+.arrow-left{
+    position: absolute;
+    color:#710273;
+    right: 35vw;
 }
+
+.arrow-right{
+    position: absolute;
+    left: 35vw;
+}
+
+.clickunable{
+    color: #C4C4C4;
+    pointer-events: none;
+}
+
+.clickable{
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.lang_bg{
+    background-size: 100%;
+    height: 100vh;
+}
+
+
+@media screen and (max-width:768px) {
+    .btn-kor{
+        font-family: 'IM_Hyemin-Bold';
+        border-radius: 50px;
+        margin: 20px;
+        cursor: pointer;
+        width: 100px;
+        height: 80px;
+        font-size: 20px;
+        border: 5px solid #6C60BF;
+        background-color: white;
+        color: #6C60BF;
+    }
+    
+    .btn-eng{
+        font-family: 'IM_Hyemin-Bold';
+        border-radius: 50px;
+        margin: 20px;
+        cursor: pointer;
+        width: 100px;
+        height: 80px;
+        font-size: 20px;
+        border: 5px solid #6C60BF;
+        background-color: white;
+        color: #6C60BF;
+    }
+
+    .lang_bg{
+        background-size: 280%;
+        height: 100vh;
+    }
+
+    .title{
+        font-size: 6vw;
+    }
+
+    .num_title{
+        font-size: 7.5vw;
+    }
+    
+ }
