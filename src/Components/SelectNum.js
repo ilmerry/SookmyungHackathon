@@ -1,7 +1,16 @@
 import React, {useState, useEffect} from "react";
+import {Link} from 'react-router-dom';
+import Progressbar from "./Progressbar";
+import Paging from "./Paging";
 import "../css/SelectPage.css";
 const API_URL = 'http://localhost:3001'
 
+const backgroundStyle = {
+    backgroundImage: 'url(/images/selectLangBackground.png)',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "100vh"
+}
 let flag=false;
 
 function SelectNum(){
@@ -67,7 +76,9 @@ function SelectNum(){
 
     
     return(
-        <div className="css-num">
+        <div style={backgroundStyle}>
+            <div className="css-num">
+            <Progressbar />
             <div className="title">최대 <span className="N">{!flag? "N" :maxlength}</span>글자까지 생성합니다</div>
             <div>
                 <tr>
@@ -88,8 +99,14 @@ function SelectNum(){
                 <tr>
                     <td><button className="keypad" onClick={()=>{delButt()}}>삭제</button></td> 
                     <td><button className="keypad" onClick={()=>numButt("0")}>0</button></td>
-                    <td><button className="keypad" onClick={()=>onClickHandler(maxlength)}>확인</button></td>
+                    <td>
+                        <Link to="/others">
+                            <button className="keypad" onClick={()=>onClickHandler(maxlength)}>확인</button>
+                        </Link>
+                    </td>
                 </tr>
+            </div>
+            <Paging />
             </div>
         </div>
     );

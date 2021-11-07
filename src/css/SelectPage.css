@@ -15,7 +15,7 @@
 }
 
 .css-pgbar::-webkit-progress-bar{
-    background-color: rgb(185, 185, 185);
+    background-color: #C4C4C4;
     margin-top: -5px;
     border-radius: 0px;
 }
@@ -40,10 +40,7 @@
 
 .css-lang .title{
     margin-top: 25vh;
-}
-
-.css-about .title{
-    margin-top: 5vh;
+    margin-bottom: 20px;
 }
 
 .css-lang .btn{
@@ -53,13 +50,14 @@
     align-items: center;
     flex-direction: row;
     cursor: pointer;
+    margin-bottom: 33vh;
 }
 
 .btn-kor{
-    border-radius: 20px;
+    border-radius: 50px;
     margin: 20px;
     cursor: pointer;
-    width: 100px;
+    width: 200px;
     height: 80px;
     font-size: 30px;
     border: 5px solid #6C60BF;
@@ -68,10 +66,10 @@
 }
 
 .btn-eng{
-    border-radius: 20px;
+    border-radius: 50px;
     margin: 20px;
     cursor: pointer;
-    width: 100px;
+    width: 200px;
     height: 80px;
     font-size: 30px;
     border: 5px solid #6C60BF;
@@ -85,6 +83,17 @@
     transition-duration: 0.4s;
 }
 
+
+.category{
+    text-align: center;
+    margin: 50px;
+}
+
+
+
+
+
+
 .css-num{
     position: relative;
     display: flex;
@@ -94,8 +103,10 @@
 } 
 
 .css-num .title{
-    margin-top: 40px;
+    margin-top: 10vh;
     margin-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
 }
 
 .keypad{
@@ -104,7 +115,7 @@
     cursor: pointer;
     width: 80px;
     height: 80px;
-    font-size: 30px;
+    font-size: 25px;
     border: 0px solid #6C60BF;
 }
 
@@ -114,15 +125,38 @@
     transition-duration: 0.4s;
 }
 
-.css-about{
+
+
+
+
+
+
+.css-paging{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    margin-bottom: 8vh;
 }
 
-.category{
-    text-align: center;
-    margin: 50px;
+.arrow-left{
+    position: absolute;
+    color:#710273;
+    right: 40vw;
+}
+
+.arrow-right{
+    position: absolute;
+    left: 40vw;
+}
+
+.clickunable{
+    color: #C4C4C4;
+    pointer-events: none;
+}
+
+.clickable{
+    pointer-events: auto;
+    cursor: pointer;
 }

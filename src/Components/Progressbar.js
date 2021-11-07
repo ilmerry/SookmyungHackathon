@@ -29,7 +29,6 @@ class Progressbar extends React.Component{
         return(
             <div>
                 <progress className="css-pgbar js-pgbar" max="100" value={this.state.value}/>
-                <button onClick={this.ProgressbarAnimation}>Click</button>
             </div>
         );
     }

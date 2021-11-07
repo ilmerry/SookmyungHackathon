@@ -1,19 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../css/SelectOthers.css';
 import Modal from 'react-modal';
 import Calendar from 'react-calendar';
-import EditText from 'react-edit-text';
+import {EditText} from 'react-edit-text';
+import { HexColorPicker, HexColorInput  } from "react-colorful";
 import 'react-calendar/dist/Calendar.css';
 import 'react-edit-text/dist/index.css';
+import Progressbar from './Progressbar';
+import Paging from './Paging';
 
+const backgroundStyle = {
+    backgroundImage: 'url(/images/selectLangBackground.png)',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "100vh"
+}
 
 Modal.setAppElement('#root') //
 function SelectOthers() {
 
-    const [birth, setBirth]=useState(null);
+    const [birth, setBirth]=useState(new Date());
     const [name, setName ]=useState(null);
     const [mbti, setMbti ]=useState(null);
-    const [color, setColor ]=useState(null);
+    const [color, setColor ]=useState("#aabbcc");
     const page=4;
 
     const onClickBirth = ()=>{
@@ -34,18 +43,17 @@ function SelectOthers() {
     const [hobbyModal, setHobbyModal] = useState(false)
     const [colorModal, setColorModal] = useState(false)
     const [charModal, setCharModal] = useState(false)
-    
-    const [birthCal, setBirthCal] = useState(new Date());
 
     const getDay=() => {
-        // 생일 입력 받아옴
-        console.log(birthCal);
-        setbirthModal(false);
+        // 생일 입력 반박자 늦게 받아짐
     }
+    useEffect(() => {
+        console.log(birth);
+    }, [birth])
 
     return (
-        <div>
-
+        <div style={backgroundStyle}>
+            <Progressbar/>
             <div className="tellMe">
                 나에 대해 알려주세요
             </div>
@@ -64,6 +72,11 @@ function SelectOthers() {
                     }
                 }>
                 <div>이름</div>
+                <div>
+                    <EditText placeholder="본명 혹은 자주 쓰던 닉네임"
+                    value={name}
+                    onChange={setName}/>
+                </div>
                 <button onClick={() => setNameModal(false)}> 닫기</button>
             </Modal>
 
@@ -83,8 +96,11 @@ function SelectOthers() {
                 <div>생일</div>
                 <div className="css-calDiv">
                     <Calendar className="css-cal"
-                    maxDate={new Date()}
-                    onClickDay={() => getDay()} />
+                        onChange={setBirth}
+                        value={birth}
+                        maxDate={new Date()}
+                        onClickDay={()=>getDay()}
+                    />
                 </div>
                 <button onClick={() => setbirthModal(false)}> 닫기</button>
             </Modal>
@@ -172,6 +188,10 @@ function SelectOthers() {
                     }
                 }>
                 <div>색상</div>
+                <div>
+                <HexColorPicker color={color} onChange={setColor} />;
+                <HexColorInput color={color} onChange={setColor} prefixed alpha />
+                </div>
                 <button onClick={() => setColorModal(false)}> 닫기</button>
             </Modal>
 
@@ -210,7 +230,7 @@ function SelectOthers() {
                 </tbody>
                 <tfoot></tfoot>
             </table>
-
+            <Paging/>
         </div>
     )
 

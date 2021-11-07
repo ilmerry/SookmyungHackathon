@@ -1,6 +1,15 @@
 import React, {useState, useEffect} from "react";
+import Progressbar from "./Progressbar";
+import Paging from "./Paging";
 import "../css/SelectPage.css";
 const API_URL = 'http://localhost:3001'
+
+const backgroundStyle = {
+    backgroundImage: 'url(/images/selectLangBackground.png)',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "100vh"
+}
 
 function SelectLang (){
     const [language, setLanguage]=useState(null);
@@ -9,8 +18,12 @@ function SelectLang (){
 
     // usecallback 써서 성능최적화 시키던가
     const onClickHandler = async (lang)=>{
-        setLanguage(lang);
-        
+        let arrowRgiht = document.querySelector(".arrow-right")
+        arrowRgiht.style.color = "#710273"
+        arrowRgiht.classList.remove("clickunable")
+        arrowRgiht.classList.add("clickable")
+
+        setLanguage(language)
         inform = {language: language};
         fetch(`${API_URL}/language`, {
             method: 'POST',
@@ -35,19 +48,23 @@ function SelectLang (){
     // <Link to="/maxlength"></Link>
     
     return(
-        <div className="css-lang">
-            <div className="title">언어를 선택해주세요</div>
-            <span className="btn">
-                <button className="btn-kor"
-                    onClick={()=>onClickHandler("kor")}>
-                    한글
-                </button>
-                <button className="btn-eng"
-                    onClick={()=>onClickHandler("en")}>
-                    English
-                </button>  
-                
-            </span>
+        <div style={backgroundStyle} className="css-lang">
+            <div className="css-lang">
+                <Progressbar />
+                <div className="title">언어를 선택해주세요</div>
+                <span className="btn">
+                    <button className="btn-kor"
+                        onClick={()=>onClickHandler("kor")}>
+                        한글
+                    </button>
+                    <button className="btn-eng"
+                        onClick={()=>onClickHandler("en")}>
+                        English
+                    </button>  
+                    
+                </span>
+                <Paging/>
+                </div>
         </div>
     )
     
