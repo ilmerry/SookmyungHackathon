@@ -12,27 +12,6 @@ function Paging(){
     const [left, setLeft ]=useState(linkList[curPage-1])
     const [right, setRight ]=useState(linkList[curPage+1])
 
-    const BtnRenderer = ()=>{
-        if(curPage == 3){
-            return(
-                <button style={{
-                    position:"absolute",
-                    borderRadius: "50px",
-                    margin: "20px",
-                    cursor: 'pointer',
-                    width: "20vw",
-                    fontSize: "15px",
-                    backgroundColor: "#9ACDD9",
-                    color: "white",
-                    border: "0px"
-                }}>닉네임 생성하기</button>
-            );
-        }else{
-            return (
-                <FaArrowRight className="arrow arrow-right clickunable" size={45} onClick={()=>onClickRight()}/>);
-        }
-    }
-
     const onClickLeft = ()=>{
 
         curPage--
@@ -57,7 +36,7 @@ function Paging(){
                     <FaArrowLeft className="arrow arrow-left" size={45} onClick={()=>onClickLeft()}/>
                 </Link>
                 <Link to={right}>
-                    <BtnRenderer />
+                    <FaArrowRight className="arrow arrow-right clickunable" size={45} onClick={()=>onClickRight()}/>
                 </Link>
             </span>
         </div>
