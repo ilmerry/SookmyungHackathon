@@ -14,8 +14,8 @@ const App = ()=>{
       <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<StartPage />}/>
-        <Route path="/language" element={<SelectLang/>}/>
         <Route path="/maxlen" element={<SelectNum/>}/>
+        <Route path="/language" element={<SelectLang/>}/>
         <Route path="/others" element={<SelectOthers/>}/>
         <Route path="/result" element={<ResultPage/>}/>
       </Routes>
