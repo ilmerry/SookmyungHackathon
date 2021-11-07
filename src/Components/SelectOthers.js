@@ -24,7 +24,7 @@ function SelectOthers() {
     const [birth, setBirth]=useState(new Date());
     const [name, setName ]=useState("클릭하여 이름 입력");
     const [mbti, setMbti ]=useState(null);
-    const [color, setColor ]=useState("#aabbcc");
+    const [color, setColor ]=useState("#D15593");
     const page=4;
 
     const onClickName = ()=>{
@@ -75,6 +75,7 @@ function SelectOthers() {
     
     // 정상
     const getColor = ()=>{
+        setColorModal(false)
         setColor(color)
         console.log(color)
     }
